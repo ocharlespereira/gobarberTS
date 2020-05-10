@@ -32,6 +32,13 @@
         "argsIgnorePattern": "_"
       }
     ],
+    "@typescript-eslint/interface-name-prefix": [
+      "errors",
+      {
+        "prefixWithI": "always",
+        "allowUnderscorePrefix": true
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",

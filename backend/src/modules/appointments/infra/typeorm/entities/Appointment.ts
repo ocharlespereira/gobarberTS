@@ -16,7 +16,7 @@ import {
  * JoinColumn -> coluna que vai identificar o usuário prestador
  */
 
-import User from './User';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('appointments')
 class Appointment {

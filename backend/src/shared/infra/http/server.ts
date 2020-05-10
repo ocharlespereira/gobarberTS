@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import express, { Request, Response, NextFunction } from 'express';
+import cors from 'cors';
 import 'express-async-errors';
 
 import uploadCofing from '@config/upload';
@@ -10,12 +11,11 @@ import routes from './routes';
 import '@shared/infra/typeorm';
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 // liberar utilizaçao das imagens
 app.use('/files', express.static(uploadCofing.directory));
-
 app.use(routes);
 
 // tratativa de errors
@@ -26,6 +26,8 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
       message: err.message,
     });
   }
+
+  console.log(err);
 
   return response.status(500).json({
     status: 'error',

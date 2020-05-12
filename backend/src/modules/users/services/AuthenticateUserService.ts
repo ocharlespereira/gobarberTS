@@ -3,17 +3,18 @@ import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import { injectable, inject } from 'tsyringe';
 
-import User from '../infra/typeorm/entities/User';
-import IUsersRepository from '@modules/users/repositories/IUsersRepository'
-
 import AppError from '@shared/errors/AppError';
+
+import User from '../infra/typeorm/entities/User';
+import IUsersRepository from '../repositories/IUsersRepository'
+
 
 interface IRequest {
   email: string;
   password: string;
-}
+} ///problema aqui
 
-interface Response {
+interface IResponse {
   user: User;
   token: string;
 }
@@ -25,7 +26,7 @@ class AuthenticateUserService {
     private usersRepository: IUsersRepository
   ) { }
 
-  public async execute({ email, password }: IRequest): Promise<Response> {
+  public async execute({ email, password }: IRequest): Promise<IResponse> {
 
     const user = await this.usersRepository.findbyEmail(email);
 

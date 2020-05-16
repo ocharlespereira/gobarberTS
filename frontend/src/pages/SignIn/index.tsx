@@ -4,7 +4,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
-import AuthContext from '../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 import getValidationErrors from '../../utils/getValidationErrors'
 
 import logoImg from '../../assets/logo.svg'
@@ -14,15 +14,18 @@ import Button from '../../components/Button'
 
 import { Container, Content, Background } from './styles';
 
+interface SignInFormData {
+  email: string;
+  password: string;
+}
+
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   //Auth
-  const { name } = useContext(AuthContext);
-  console.log(name);
+  const { signIn } = useContext(AuthContext);
 
-
-  const handleSubmit = useCallback(async (data: Object) => {
+  const handleSubmit = useCallback(async (data: SignInFormData) => {
     try {
       formRef.current?.setErrors({});
 
@@ -35,12 +38,16 @@ const SignIn: React.FC = () => {
         abortEarly: false,
       });
 
+      signIn({
+        email: data.email,
+        password: data.password,
+      });
     } catch (err) {
       // console.log(err);
       const errors = getValidationErrors(err);
       formRef.current?.setErrors(errors);
     }
-  }, [])
+  }, [signIn])
 
   return (
     <Container>

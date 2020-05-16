@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
 interface AuthState {
@@ -16,11 +16,11 @@ interface AuthContextData {
   signIn(credentials: SignInCredentials): Promise<void>;
 }
 
-export const AuthContext = createContext<AuthContextData>(
+const AuthContext = createContext<AuthContextData>(
   {} as AuthContextData
 );
 
-export const AuthProvider: React.FC = ({ children }) => {
+const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@Gobarber2020:token');
     const user = localStorage.getItem('@Gobarber2020:user');
@@ -53,4 +53,14 @@ export const AuthProvider: React.FC = ({ children }) => {
   )
 }
 
-export default AuthContext;
+const useAuth = (): AuthContextData => {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must by used within an AuthProvider');
+  }
+
+  return context;
+}
+
+export { AuthProvider, useAuth };

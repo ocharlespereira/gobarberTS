@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { shade } from 'polished'
+import { shade } from 'polished';
 
-import signUpBackground from '../../assets/sign-up-background.png'
+import signUpBackground from '../../assets/sign-up-background.png';
 
 export const Container = styled.div`
   height: 100vh;
@@ -30,19 +30,19 @@ export const Content = styled.div`
     }
 
     a {
-      color: #F4EDE8;
+      color: #f4ede8;
       display: block;
       margin-top: 24px;
       transition: color 0.2s;
 
       &:hover {
-        color: ${shade(0.2, '#f4ede8')}
+        color: ${shade(0.2, '#f4ede8')};
       }
     }
   }
 
   > a {
-    color: #F4EDE8;
+    color: #f4ede8;
     display: block;
     margin-top: 24px;
     transition: color 0.2s;
@@ -52,13 +52,12 @@ export const Content = styled.div`
     margin-right: 16px;
 
     &:hover {
-        color: ${shade(0.2, '#F4EDE8')};
-      }
+      color: ${shade(0.2, '#F4EDE8')};
+    }
   }
-
 `;
 export const Background = styled.div`
-  flex:1;
+  flex: 1;
   background: url(${signUpBackground}) no-repeat center;
   background-size: cover;
 `;

@@ -29,6 +29,8 @@
     "prettier"
   ],
   "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-unused-vars": "off",
     "prettier/prettier": "error",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
@@ -46,7 +48,7 @@
     ],
     "import/extensions": [
       "error",
-      " ignorePackages",
+      "ignorePackages",
       {
         "ts": "never",
         "tsx": "never"

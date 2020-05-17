@@ -1,5 +1,5 @@
 module.exports = {
-  singleQuote: true,
-  trailingComma: 'all',
-  allowParens: 'avoid',
+  singleQuote: true, //aspas simples
+  trailingComma: 'all', //virgula no final de arrays
+  allowParens: 'avoid', //nao colocar parenteses q tenham arrowfuncions de uma linha
 }

@@ -3,6 +3,7 @@ import { injectable, inject } from 'tsyringe';
 // import AppError from '@shared/errors/AppError';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
+import AppError from '@shared/errors/AppError';
 
 // import User from '../infra/typeorm/entities/User';
 
@@ -20,10 +21,17 @@ class SendForgotPasswordEmailService {
     private mailProvider: IMailProvider,
   ) {}
 
-  public async execute(data: IRequest): Promise<void> {
-    this.mailProvider.sendMail(email, 
-      'Pedido de recuperação de senha recebido.'
-    )
+  public async execute({ email }: IRequest): Promise<void> {
+    const checkUserExists = await this.usersRepository.findbyEmail(email);
+
+    if (!checkUserExists) {
+      throw new AppError('User does not exists.');
+    }
+
+    this.mailProvider.sendMail(
+      email,
+      'Pedido de recuperação de senha recebido.',
+    );
   }
 }
 

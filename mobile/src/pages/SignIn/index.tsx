@@ -5,7 +5,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Keyboard,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 

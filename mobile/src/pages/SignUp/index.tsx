@@ -16,6 +16,7 @@ import { formHandles } from '@unform/core';
 
 import * as Yup from 'yup';
 import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -50,13 +51,14 @@ const SignUp: React.FC = () => {
         abortEarly: false,
       });
 
-      // Metodo Authenticator com await
-      // await signIn({
-      //   email: data.email,
-      //   password: data.password,
-      // });
+      await api.post('./users', data);
 
-      // history.push('/dashboard');
+      Alert.alert(
+        'Cadastro realizado com sucesso',
+        'Você já pode fazer login na aplicação.',
+      );
+
+      navigation.goBack();
     } catch (err) {
       // verifica se o erro é originado do Yup
       if (err instanceof Yup.ValidationError) {

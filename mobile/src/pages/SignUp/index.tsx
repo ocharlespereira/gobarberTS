@@ -37,44 +37,47 @@ const SignUp: React.FC = () => {
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
-  const handleSignUp = useCallback(async (data: SignUpFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSignUp = useCallback(
+    async (data: SignUpFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        email: Yup.string().required('E-mail obrigatório').email(),
-        password: Yup.string().required('Senha Obrigatória'),
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Nome obrigatório'),
+          email: Yup.string().required('E-mail obrigatório').email(),
+          password: Yup.string().required('Senha Obrigatória'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      await api.post('./users', data);
+        await api.post('./users', data);
 
-      Alert.alert(
-        'Cadastro realizado com sucesso',
-        'Você já pode fazer login na aplicação.',
-      );
+        Alert.alert(
+          'Cadastro realizado com sucesso',
+          'Você já pode fazer login na aplicação.',
+        );
 
-      navigation.goBack();
-    } catch (err) {
-      // verifica se o erro é originado do Yup
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        navigation.goBack();
+      } catch (err) {
+        // verifica se o erro é originado do Yup
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
 
-        return;
+          return;
+        }
+
+        Alert.alert(
+          'Erro na autenticação',
+          'Ocorreu um erro ao fazer login, cheque as credenciais.',
+        );
       }
-
-      Alert.alert(
-        'Erro na autenticação',
-        'Ocorreu um erro ao fazer login, cheque as credenciais.',
-      );
-    }
-  }, []);
+    },
+    [navigation],
+  );
 
   return (
     <>

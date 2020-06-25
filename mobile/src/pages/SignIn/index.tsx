@@ -15,6 +15,8 @@ import * as Yup from 'yup';
 import { Form } from '@unform/mobile';
 import { formHandles } from '@unform/core';
 
+import { useAuth } from '../../hooks/auth';
+
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -40,6 +42,8 @@ const SignIn: React.FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
 
+  const { signIn } = useAuth();
+
   const handleSignIn = useCallback(async (data: SignInFormData) => {
     try {
       formRef.current?.setErrors({});
@@ -54,10 +58,10 @@ const SignIn: React.FC = () => {
       });
 
       // Metodo Authenticator com await
-      // await signIn({
-      //   email: data.email,
-      //   password: data.password,
-      // });
+      await signIn({
+        email: data.email,
+        password: data.password,
+      });
 
       // history.push('/dashboard');
     } catch (err) {

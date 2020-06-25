@@ -44,42 +44,45 @@ const SignIn: React.FC = () => {
 
   const { signIn } = useAuth();
 
-  const handleSignIn = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        email: Yup.string().required('E-mail obrigatório').email(),
-        password: Yup.string().required('Senha Obrigatória'),
-      });
+        const schema = Yup.object().shape({
+          email: Yup.string().required('E-mail obrigatório').email(),
+          password: Yup.string().required('Senha Obrigatória'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      // Metodo Authenticator com await
-      await signIn({
-        email: data.email,
-        password: data.password,
-      });
+        // Metodo Authenticator com await
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
 
-      // history.push('/dashboard');
-    } catch (err) {
-      // verifica se o erro é originado do Yup
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        // history.push('/dashboard');
+      } catch (err) {
+        // verifica se o erro é originado do Yup
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
 
-        return;
+          return;
+        }
+
+        Alert.alert(
+          'Erro na autenticação',
+          'Ocorreu um erro ao fazer login, cheque as credenciais.',
+        );
       }
-
-      Alert.alert(
-        'Erro na autenticação',
-        'Ocorreu um erro ao fazer login, cheque as credenciais.',
-      );
-    }
-  }, []);
+    },
+    [signIn],
+  );
 
   return (
     <>

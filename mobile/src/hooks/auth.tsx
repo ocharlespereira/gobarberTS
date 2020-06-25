@@ -1,0 +1,90 @@
+import React, {
+  createContext,
+  useCallback,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
+import api from '../../services/api';
+
+interface AuthState {
+  token: string;
+  user: object;
+}
+
+interface SignInCredentials {
+  email: string;
+  password: string;
+}
+
+interface AuthContextData {
+  user: object;
+  signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
+}
+
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
+
+const AuthProvider: React.FC = ({ children }) => {
+  const [data, setData] = useState<AuthState>({} as AuthState);
+
+  useEffect(() => {
+    async function loadStoragedData(): Promise<void> {
+      const [token, user] = await AsyncStorage.multiGet([
+        '@Gobarber2020:token',
+        '@Gobarber2020:user',
+      ]);
+
+      if (token[1] && user[1]) {
+        setData({ token: token[1], user: JSON.parse(user[1]) });
+      }
+    }
+
+    loadStoragedData();
+  }, []);
+
+  const signIn = useCallback(async ({ email, password }) => {
+    const response = await api.post('sessions', {
+      email,
+      password,
+    });
+
+    const { token, user } = response.data;
+
+    await AsyncStorage.multiSet([
+      ['@Gobarber2020:token', token],
+      ['@Gobarber2020:user', JSON.stringify(user)],
+    ]);
+
+    setData({ token, user });
+  }, []);
+
+  // Logout
+  const signOut = useCallback(async () => {
+    const token = AsyncStorage.multiRemove([
+      '@Gobarber2020:token',
+      '@Gobarber2020:user',
+    ]);
+
+    setData({} as AuthState);
+  }, []);
+
+  return (
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+const useAuth = (): AuthContextData => {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must by used within an AuthProvider');
+  }
+
+  return context;
+};
+
+export { AuthProvider, useAuth };

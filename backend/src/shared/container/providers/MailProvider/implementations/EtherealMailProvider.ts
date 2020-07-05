@@ -1,17 +1,19 @@
+import nodemailer from 'nodemailer';
 import IMailProvider from '../models/IMailProvider';
 
-interface IMessage {
-  to: string;
-  body: string;
-}
-
 export default class EtherealMailProvider implements IMailProvider {
-  private messages: IMessage[] = [];
-
-  public async sendMail(to: string, body: string): Promise<void> {
-    this.messages.push({
-      to,
-      body,
+  constructor() {
+    const account = await nodemailer.createTestAccount();
+    const transporter = nodemailer.createTransport({
+      host: account.smtp.host,
+      port: account.smtp.port,
+      secure: account.smtp.secure,
+      auth: {
+        user: account.user,
+        pass: account.pass,
+      },
     });
   }
+
+  public async sendMail(to: string, body: string): Promise<void> {}
 }

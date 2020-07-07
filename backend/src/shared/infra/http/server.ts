@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 // liberar utilizaçao das imagens
-app.use('/files', express.static(uploadCofing.directory));
+app.use('/files', express.static(uploadCofing.uploadsFolder));
 app.use(routes);
 
 // tratativa de errors

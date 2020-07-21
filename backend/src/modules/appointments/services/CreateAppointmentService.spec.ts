@@ -3,13 +3,18 @@ import AppError from '@shared/errors/AppError';
 import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentService from './CreateAppointmentService';
 
+let fakeAppointmentsRepository: FakeAppointmentsRepository;
+let createAppointment: CreateAppointmentService;
+
 describe('CreateAppointment', () => {
-  it('should be able to create a new appointment', async () => {
-    const fakeAppointmentsRepository = new FakeAppointmentsRepository; //instanciar
-    const createAppointment = new CreateAppointmentService(
+  beforeEach(() => {
+    fakeAppointmentsRepository = new FakeAppointmentsRepository(); //instanciar
+    createAppointment = new CreateAppointmentService(
       fakeAppointmentsRepository,
     );
+  });
 
+  it('should be able to create a new appointment', async () => {
     const appointment = await createAppointment.execute({
       date: new Date(),
       provider_id: '12412141212',
@@ -20,11 +25,6 @@ describe('CreateAppointment', () => {
   });
 
   it('should not be able to create two appointments on the same time', async () => {
-    const fakeAppointmentsRepository = new FakeAppointmentsRepository; //instanciar
-    const createAppointment = new CreateAppointmentService(
-      fakeAppointmentsRepository,
-    );
-
     const appointmentDate = new Date(2020, 4, 10, 11); //janeiro comeca com 0 por isso 4 é maio.
 
     await createAppointment.execute({
@@ -32,15 +32,15 @@ describe('CreateAppointment', () => {
       provider_id: '12412141212',
     });
 
-    expect(createAppointment.execute({
-      date: appointmentDate,
-      provider_id: '12412141212',
-    })).rejects.toBeInstanceOf(AppError); //rejeite, e o erro seja uma instancia de apperror
+    expect(
+      createAppointment.execute({
+        date: appointmentDate,
+        provider_id: '12412141212',
+      }),
+    ).rejects.toBeInstanceOf(AppError); //rejeite, e o erro seja uma instancia de apperror
   });
 
   // it('should not able to create two appointments on the same time', () => {
   //   expect(1 + 2).toBe(3);
   // });
-
-
-})
+});

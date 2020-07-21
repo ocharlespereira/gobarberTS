@@ -5,6 +5,16 @@ import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
 describe('UpdateUserAvatar', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository(); //instanciar
+    fakeStorageProvider = new FakeStorageProvider();
+
+    updateUserAvatar = new UpdateUserAvatarService(
+      fakeUsersRepository,
+      fakeStorageProvider,
+    );
+  });
+
   it('should be able to create a new user', async () => {
     const fakeUsersRepository = new FakeUsersRepository(); //instanciar
     const fakeStorageProvider = new FakeStorageProvider();

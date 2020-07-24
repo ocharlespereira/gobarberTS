@@ -10,11 +10,14 @@ import AppError from '@shared/errors/AppError';
 
 interface IRequest {
   user_id: string;
-  avatarFileName: string;
+  name: string;
+  email: string;
+  old_password?: string;
+  password?: string;
 }
 
 @injectable()
-class UpdateProfileService {
+class UpdateProfile {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -44,4 +47,4 @@ class UpdateProfileService {
   }
 }
 
-export default UpdateProfileService;
+export default UpdateProfile;

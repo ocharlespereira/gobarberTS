@@ -33,6 +33,12 @@ class UpdateProfile {
       throw new AppError('User not found');
     }
 
+    const userWithUpdateEmail = await this.usersRepository.findbyEmail(email);
+
+    if (userWithUpdateEmail && userWithUpdateEmail.id !== user_id) {
+      throw new AppError('E-mail already in use.');
+    }
+
     user.name = name;
     user.email = email;
 

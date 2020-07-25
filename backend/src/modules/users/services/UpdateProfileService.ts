@@ -26,7 +26,11 @@ class UpdateProfile {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ user_id, name, email }: IRequest): Promise<void> {}
+  public async execute({ user_id, name, email }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findbyId(user_id);
+
+    return user;
+  }
 }
 
 export default UpdateProfile;

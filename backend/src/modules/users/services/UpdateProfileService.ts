@@ -33,7 +33,10 @@ class UpdateProfile {
       throw new AppError('User not found');
     }
 
-    return user;
+    user.name = name;
+    user.email = email;
+
+    return this.usersRepository.save(user);
   }
 }
 

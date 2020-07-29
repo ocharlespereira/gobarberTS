@@ -1,10 +1,9 @@
 import { injectable, inject } from 'tsyringe';
 
-import User from '../infra/typeorm/entities/User';
+import AppError from '@shared/errors/AppError';
 
 import IUsersRepository from '../repositories/IUsersRepository';
-
-import AppError from '@shared/errors/AppError';
+import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   user_id: string;

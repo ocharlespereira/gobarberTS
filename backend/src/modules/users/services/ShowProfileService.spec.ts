@@ -8,14 +8,14 @@ let showProfile: ShowProfileService;
 
 describe('UpdateProfile', () => {
   beforeEach(() => {
-    fakeUsersRepository = new FakeUsersRepository(); /
+    fakeUsersRepository = new FakeUsersRepository();
 
     showProfile = new ShowProfileService(fakeUsersRepository);
   });
 
   it('should be able show the profile', async () => {
-   const user = await fakeUsersRepository.create({
-      name: 'John Doe', //fulano
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
       email: 'johndoe@exemple.com',
       password: '123456',
     });
@@ -28,4 +28,11 @@ describe('UpdateProfile', () => {
     await expect(profile.email).toBe('johndoe@exemple.com');
   });
 
+  it('should not be able show the profile from non-existing user', async () => {
+    expect(
+      showProfile.execute({
+        user_id: 'non-existing-user-id',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

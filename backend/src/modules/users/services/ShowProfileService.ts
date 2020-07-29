@@ -22,6 +22,8 @@ class ShowProfileService {
     if (!user) {
       throw new AppError('User not found');
     }
+
+    return user;
   }
 }
 

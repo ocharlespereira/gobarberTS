@@ -1,12 +1,12 @@
-import { uuid } from 'uuidv4'
+import { uuid } from 'uuidv4';
 
-import IUsersRepository from '@modules/users/repositories/IUsersRepository'
+import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 
 import User from '../../infra/typeorm/entities/User';
 
 export default class UsersRepository implements IUsersRepository {
-  private users: User[] = []
+  private users: User[] = [];
 
   public async findbyId(id: string): Promise<User | undefined> {
     const findUser = this.users.find(user => user.id === id);
@@ -18,7 +18,16 @@ export default class UsersRepository implements IUsersRepository {
     const findUser = this.users.find(user => user.email === email);
 
     return findUser;
+  }
 
+  public async findAllProvider(except_user_id?: string): Promise<User[]> {
+    let { users } = this;
+
+    if (except_user_id) {
+      users = this.users.filter(user => user.id !== except_user_id);
+    }
+
+    return users;
   }
 
   public async create(userData: ICreateUserDTO): Promise<User> {
@@ -28,7 +37,7 @@ export default class UsersRepository implements IUsersRepository {
 
     this.users.push(user);
 
-    return user
+    return user;
   }
 
   public async save(user: User): Promise<User> {

@@ -20,7 +20,7 @@ export default class UsersRepository implements IUsersRepository {
     return findUser;
   }
 
-  public async findAllProvider(except_user_id?: string): Promise<User[]> {
+  public async findAllProviders(except_user_id?: string): Promise<User[]> {
     let { users } = this;
 
     if (except_user_id) {

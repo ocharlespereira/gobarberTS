@@ -17,7 +17,7 @@ class ShowProfileService {
   ) {}
 
   public async execute({ user_id }: IRequest): Promise<User> {
-    const user = await this.usersRepository.findbyId(user_id);
+    const users = await this.usersRepository.findAllProviders(user_id);
 
     if (!user) {
       throw new AppError('User not found');

@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
-import User from '@modules/users/infra/typeorm/entities/User';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
+import AppointmentsRepository from '../infra/typeorm/repositories/AppointmentsRepository';
 
 interface IRequest {
   user_id: string;
@@ -16,7 +16,10 @@ type IResponse = Array<{
 
 @injectable()
 class ListProviderMonthAvailabilityService {
-  constructor() {}
+  constructor(
+    @inject('AppointmentsRepository')
+    private AppointmentsRepository: IAppointmentsRepository,
+  ) {}
 
   public async execute({ user_id, month, year }: IRequest): Promise<IResponse> {
     return [{ day: 1, available: false }];

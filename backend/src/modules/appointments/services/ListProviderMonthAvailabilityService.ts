@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import { getDaysInMonth } from 'date-fns';
 
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 import AppointmentsRepository from '../infra/typeorm/repositories/AppointmentsRepository';
@@ -34,7 +35,7 @@ class ListProviderMonthAvailabilityService {
       },
     );
 
-    console.log(appointments);
+    const numberOfDaysInMonth = getDaysInMonth(new Date(year, month - 1));
 
     return [{ day: 1, available: false }];
   }

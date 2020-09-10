@@ -24,9 +24,9 @@ class ListProviderDayAvailabilityService {
 
   public async execute({
     provider_id,
+    day,
     month,
     year,
-    day,
   }: IRequest): Promise<IResponse> {
     return [{ hour: 8, available: true }];
   }

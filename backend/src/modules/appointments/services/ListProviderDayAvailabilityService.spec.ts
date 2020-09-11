@@ -42,7 +42,6 @@ describe('ListProviderDayAvailability', () => {
         { hour: 13, available: true },
         { hour: 14, available: false },
         { hour: 15, available: false },
-        { hour: 16, available: false },
         { hour: 16, available: true },
       ]),
     );

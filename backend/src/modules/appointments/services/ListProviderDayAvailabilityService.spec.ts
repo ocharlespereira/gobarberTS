@@ -31,7 +31,6 @@ describe('ListProviderDayAvailability', () => {
 
     const availability = await listProviderDayAvailability.execute({
       provider_id: 'user',
-      user_id: 'user',
       year: 2020,
       month: 5,
       day: 20,

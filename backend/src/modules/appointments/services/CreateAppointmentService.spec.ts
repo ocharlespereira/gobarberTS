@@ -43,7 +43,17 @@ describe('CreateAppointment', () => {
     ).rejects.toBeInstanceOf(AppError); //rejeite, e o erro seja uma instancia de apperror
   });
 
-  // it('should not able to create two appointments on the same time', () => {
-  //   expect(1 + 2).toBe(3);
-  // });
+  it('should not be able to create an appointments on a past date', async () => {
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2020, 4, 10, 12).getTime();
+    });
+
+    expect(
+      createAppointment.execute({
+        date: new Date(2020, 4, 10, 11),
+        user_id: '123123',
+        provider_id: '12412141212',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

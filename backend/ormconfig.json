@@ -1,5 +1,6 @@
 [
   {
+    "name": "default",
     "type": "postgres",
     "host": "localhost",
     "port": 5432,
@@ -13,8 +14,9 @@
     }
   },
   {
-    "type": "mongo",
-    "host": "mongodb",
+    "name": "mongo",
+    "type": "mongodb",
+    "host": "localhost",
     "port": 27017,
     "database": "gobarber",
     "useUnifiedTopology": true,

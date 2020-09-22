@@ -10,6 +10,7 @@ import routes from './routes';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
+import { errors } from 'celebrate';
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,8 @@ app.use(express.json());
 // liberar utilizaçao das imagens
 app.use('/files', express.static(uploadCofing.uploadsFolder));
 app.use(routes);
+
+app.use(errors());
 
 // tratativa de errors
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {

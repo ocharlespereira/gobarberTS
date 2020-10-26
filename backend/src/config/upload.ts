@@ -7,6 +7,9 @@ const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 interface IUploadConfig {
   driver: 's3' | 'disk';
 
+  tmpFolder: string;
+  uploadsFolder: string;
+
   config: {
     disk: {
       storage: StorageEngine;
@@ -15,9 +18,9 @@ interface IUploadConfig {
 }
 
 export default {
-  diver: process.env.STORAGE_DRIVER,
+  driver: process.env.STORAGE_DRIVER,
 
-  tmpFolder: tmpFolder,
+  tmpFolder,
   uploadsFolder: path.resolve(tmpFolder, 'uploads'),
 
   config: {
@@ -33,4 +36,4 @@ export default {
       }),
     },
   },
-};
+} as IUploadConfig;

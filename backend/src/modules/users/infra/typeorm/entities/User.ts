@@ -43,6 +43,8 @@ class User {
         return `${process.env.APP_API_URL}/files/${this.avatar}`;
       case 's3':
         return `https://${uploadConfig.config.aws.bucket}.s3.amazonws.com/${this.avatar}`;
+      default:
+        return null;
     }
   }
 }

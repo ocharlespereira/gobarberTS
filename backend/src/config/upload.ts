@@ -10,10 +10,12 @@ interface IUploadConfig {
   tmpFolder: string;
   uploadsFolder: string;
 
+  multer: {
+    storage: StorageEngine;
+  };
+
   config: {
-    disk: {
-      storage: StorageEngine;
-    };
+    disk: {};
   };
 }
 
@@ -23,17 +25,19 @@ export default {
   tmpFolder,
   uploadsFolder: path.resolve(tmpFolder, 'uploads'),
 
-  config: {
-    disk: {
-      storage: multer.diskStorage({
-        destination: tmpFolder,
-        filename(request, file, callback) {
-          const fileHash = crypto.randomBytes(10).toString('HEX');
-          const fileName = `${fileHash}-${file.originalname}`;
+  multer: {
+    storage: multer.diskStorage({
+      destination: tmpFolder,
+      filename(request, file, callback) {
+        const fileHash = crypto.randomBytes(10).toString('HEX');
+        const fileName = `${fileHash}-${file.originalname}`;
 
-          return callback(null, fileName);
-        },
-      }),
-    },
+        return callback(null, fileName);
+      },
+    }),
+  },
+
+  config: {
+    disk: {},
   },
 } as IUploadConfig;

@@ -23,18 +23,15 @@ class DiskStorageProvider implements IStorageProvider {
       throw new Error('File not found');
     }
 
-    const fileContent = await fs.promises.readFile(originalPath, {
-      encoding: 'utf-8',
-    });
+    const fileContent = await fs.promises.readFile(originalPath);
 
     await this.client
       .putObject({
-        Bucket: 'app-gobarber',
+        Bucket: uploadConfig.config.aws.bucket,
         Key: file,
         ACL: 'public-read',
         Body: fileContent,
         ContentType,
-        ContentDisposition: `inline; filename=${file}`,
       })
       .promise();
 
@@ -44,7 +41,7 @@ class DiskStorageProvider implements IStorageProvider {
   public async deleteFile(file: string): Promise<void> {
     await this.client
       .deleteObject({
-        Bucket: 'app-gobarber',
+        Bucket: uploadConfig.config.aws.bucket,
         Key: file,
       })
       .promise();

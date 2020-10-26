@@ -28,6 +28,8 @@ class DiskStorageProvider implements IStorageProvider {
         Body: fileContent,
       })
       .promise();
+
+    return file;
   }
 
   public async deleteFile(file: string): Promise<void> {

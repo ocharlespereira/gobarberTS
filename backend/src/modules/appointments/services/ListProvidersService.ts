@@ -19,14 +19,17 @@ class ListProviderService {
   ) {}
 
   public async execute({ user_id }: IRequest): Promise<User[]> {
-    await
+    let users = await this.cacheProvider.recover<User[]>(
+      `providers-list:${user_id}`,
+    );
 
+    if (!users) {
+      users = await this.usersRepository.findAllProviders({
+        except_user_id: user_id,
+      });
 
-    const users = await this.usersRepository.findAllProviders({
-      except_user_id: user_id,
-    });
-
-    await this.cacheProvider.save(`providers-list:${user_id}`)
+      await this.cacheProvider.save(`providers-list:${user_id}`, users);
+    }
 
     return users;
   }

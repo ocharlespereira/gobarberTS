@@ -8,12 +8,15 @@ import 'express-async-errors';
 import uploadCofing from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import routes from './routes';
+import rateLimiter from './routes/middlewares/RateLimiter';
 
 import '@shared/infra/typeorm';
 import '@shared/container';
 import { errors } from 'celebrate';
 
 const app = express();
+
+app.use(rateLimiter);
 app.use(cors());
 app.use(express.json());
 

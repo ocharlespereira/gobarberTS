@@ -23,7 +23,7 @@ export default class FakeCacheProvider implements ICacheProvider {
     return parsedData;
   }
 
-  public async invalidade(key: string): Promise<void> {
+  public async invalidate(key: string): Promise<void> {
     delete this.cache[key];
   }
 

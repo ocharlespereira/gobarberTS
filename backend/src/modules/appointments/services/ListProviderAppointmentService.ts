@@ -34,7 +34,7 @@ class ListProviderAppointmentService {
     );
 
     if (!appointments) {
-      const appointments = await this.appointmentsRepository.findAllInDayFromProvider(
+      appointments = await this.appointmentsRepository.findAllInDayFromProvider(
         {
           provider_id,
           year,

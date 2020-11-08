@@ -14,6 +14,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Container, Content, AnimationContainer, Background } from './styles';
+import api from '../../services/api';
 
 interface ResetPasswordFormData {
   password: string;
@@ -42,6 +43,13 @@ const SignIn: React.FC = () => {
 
         await schema.validate(data, {
           abortEarly: false,
+        });
+
+        const { password, password_confirmation } = data;
+
+        await api.post('/password/reset', {
+          password,
+          password_confirmation,
         });
 
         history.push('/signin');

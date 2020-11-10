@@ -8,7 +8,7 @@ import 'express-async-errors';
 import uploadCofing from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import routes from './routes';
-import rateLimiter from './routes/middlewares/RateLimiter';
+import rateLimiter from './routes/middlewares/rateLimiter';
 
 import '@shared/infra/typeorm';
 import '@shared/container';

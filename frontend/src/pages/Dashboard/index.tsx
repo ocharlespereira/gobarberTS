@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => (
   <Container>
     <Header>
       <HeaderContent>
-        <img src={logo} alt="Gobarber" />
+        <img src={logoImg} alt="Gobarber" />
 
         <Profile>
           <img

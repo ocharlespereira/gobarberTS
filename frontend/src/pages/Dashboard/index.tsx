@@ -54,14 +54,14 @@ const Dashboard: React.FC = () => {
             <strong>Atendimento a seguir</strong>
             <div>
               <img src={imgDefault} alt="Charles Pereira" />
+
+              <strong>Charles Pereira</strong>
+
+              <span>
+                <FiClock />
+                08:00
+              </span>
             </div>
-
-            <strong>Charles Pereira</strong>
-
-            <span>
-              <FiClock />
-              08:00
-            </span>
           </NextAppointment>
         </Schedule>
         <Calendar />

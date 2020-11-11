@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiPower } from 'react-icons/fi';
+import { FiClock, FiPower } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
 
@@ -12,6 +12,7 @@ import {
   Profile,
   Content,
   Schedule,
+  NextAppointment,
   Calendar,
 } from './styles';
 
@@ -54,6 +55,13 @@ const Dashboard: React.FC = () => {
             <div>
               <img src={imgDefault} alt="Charles Pereira" />
             </div>
+
+            <strong>Charles Pereira</strong>
+
+            <span>
+              <FiClock />
+              08:00
+            </span>
           </NextAppointment>
         </Schedule>
         <Calendar />

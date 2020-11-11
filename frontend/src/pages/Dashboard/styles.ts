@@ -56,3 +56,16 @@ export const Profile = styled.div`
     }
   }
 `;
+export const Content = styled.main`
+  max-width: 1120px;
+  margin: 64px auto;
+  display: flex;
+`;
+
+export const Schedule = styled.div`
+  flex: 1;
+`;
+
+export const Calendar = styled.aside`
+  width: 380px;
+`;

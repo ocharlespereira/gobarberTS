@@ -15,6 +15,7 @@ import {
   NextAppointment,
   Section,
   Calendar,
+  Appointment,
 } from './styles';
 
 const Dashboard: React.FC = () => {
@@ -67,9 +68,44 @@ const Dashboard: React.FC = () => {
 
           <Section>
             <strong>Manhã</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img src={imgDefault} alt="Charles Pereira" />
+
+                <strong>Charles Pereira</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img src={imgDefault} alt="Charles Pereira" />
+
+                <strong>Charles Pereira</strong>
+              </div>
+            </Appointment>
           </Section>
           <Section>
             <strong>Tarde</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+              <div>
+                <img src={imgDefault} alt="Charles Pereira" />
+
+                <strong>Charles Pereira</strong>
+              </div>
+            </Appointment>
           </Section>
         </Schedule>
         <Calendar />

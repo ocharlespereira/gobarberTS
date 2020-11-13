@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiClock, FiPower } from 'react-icons/fi';
 
 import { useAuth } from '../../hooks/auth';
@@ -19,6 +19,8 @@ import {
 } from './styles';
 
 const Dashboard: React.FC = () => {
+  const [selectedDDate, setSelectedDate] = useState(new Date());
+
   const { signOut, user } = useAuth();
   const imgDefault =
     'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';

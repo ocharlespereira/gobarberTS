@@ -13,6 +13,7 @@ import {
   Content,
   Schedule,
   NextAppointment,
+  Section,
   Calendar,
 } from './styles';
 
@@ -63,6 +64,13 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </NextAppointment>
+
+          <Section>
+            <strong>Manhã</strong>
+          </Section>
+          <Section>
+            <strong>Tarde</strong>
+          </Section>
         </Schedule>
         <Calendar />
       </Content>

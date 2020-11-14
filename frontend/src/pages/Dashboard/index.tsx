@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { FiClock, FiPower } from 'react-icons/fi';
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 
 import { useAuth } from '../../hooks/auth';
 
@@ -110,7 +112,9 @@ const Dashboard: React.FC = () => {
             </Appointment>
           </Section>
         </Schedule>
-        <Calendar />
+        <Calendar>
+          <DayPicker />
+        </Calendar>
       </Content>
     </Container>
   );

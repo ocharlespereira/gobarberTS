@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { FiClock, FiPower } from 'react-icons/fi';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -115,6 +115,10 @@ const Dashboard: React.FC = () => {
         <Calendar>
           <DayPicker
             weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
+            fromMonth={new Date()}
+            disabledDays={[{ daysOfWeek: [0, 6] }]}
+            modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
+            // onDayClick={handleDateChange}
             months={[
               'Janeiro',
               'Fevereiro',

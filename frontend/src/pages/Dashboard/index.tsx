@@ -20,10 +20,6 @@ import {
   Appointment,
 } from './styles';
 
-interface CalendarModifiers extends DayModifiers {
-  available: boolean;
-}
-
 const Dashboard: React.FC = () => {
   const [selectedDDate, setSelectedDate] = useState(new Date());
 
@@ -31,14 +27,11 @@ const Dashboard: React.FC = () => {
   const imgDefault =
     'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
-  const handleDateChange = useCallback(
-    (day: Date, modifers: CalendarModifiers) => {
-      if (modifers.available) {
-        setSelectedDate(day);
-      }
-    },
-    [],
-  );
+  const handleDateChange = useCallback((day: Date, modifers: DayModifiers) => {
+    if (modifers.available) {
+      setSelectedDate(day);
+    }
+  }, []);
 
   return (
     <Container>
@@ -132,6 +125,7 @@ const Dashboard: React.FC = () => {
             disabledDays={[{ daysOfWeek: [0, 6] }]}
             modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
             onDayClick={handleDateChange}
+            selectedDays={selectedDDate}
             months={[
               'Janeiro',
               'Fevereiro',

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { FiClock, FiPower } from 'react-icons/fi';
-import DayPicker from 'react-day-picker';
+import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 import { useAuth } from '../../hooks/auth';
@@ -20,12 +20,25 @@ import {
   Appointment,
 } from './styles';
 
+interface CalendarModifiers extends DayModifiers {
+  available: boolean;
+}
+
 const Dashboard: React.FC = () => {
   const [selectedDDate, setSelectedDate] = useState(new Date());
 
   const { signOut, user } = useAuth();
   const imgDefault =
     'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
+
+  const handleDateChange = useCallback(
+    (day: Date, modifers: CalendarModifiers) => {
+      if (modifers.available) {
+        setSelectedDate(day);
+      }
+    },
+    [],
+  );
 
   return (
     <Container>
@@ -118,7 +131,7 @@ const Dashboard: React.FC = () => {
             fromMonth={new Date()}
             disabledDays={[{ daysOfWeek: [0, 6] }]}
             modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
-            // onDayClick={handleDateChange}
+            onDayClick={handleDateChange}
             months={[
               'Janeiro',
               'Fevereiro',

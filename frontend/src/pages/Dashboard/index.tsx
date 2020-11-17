@@ -21,6 +21,12 @@ import {
   Appointment,
 } from './styles';
 import { ThemeConsumer } from 'styled-components';
+import { NumberLiteralType } from 'typescript';
+
+interface MonthAvailabilityItem {
+  day: number;
+  available: boolean;
+}
 
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
@@ -43,7 +49,9 @@ const months = [
 const Dashboard: React.FC = () => {
   const [selectedDDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [monthAvailability, setMonthAvailability] = useState([]);
+  const [monthAvailability, setMonthAvailability] = useState<
+    MonthAvailabilityItem[]
+  >([]);
 
   const { user, signOut } = useAuth();
 
@@ -68,7 +76,7 @@ const Dashboard: React.FC = () => {
       .then((response) => {
         setMonthAvailability(response.data);
       });
-  }, [currentMonth]);
+  }, [currentMonth, user?.id]);
 
   return (
     <Container>

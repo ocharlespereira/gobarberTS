@@ -30,10 +30,10 @@ const AuthProvider: React.FC = ({ children }) => {
     const user = localStorage.getItem('@Gobarber2020:user');
 
     if (token && user) {
+      api.defaults.headers.authorization = `Bearer ${token}`;
+
       return { token, user: JSON.parse(user) }; // parse -> transforma em objeto
     }
-
-    api.defaults.headers.authorization = `Bearer ${token}`;
 
     return {} as AuthState; // força typagem, hack
   });

@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FiClock, FiPower } from 'react-icons/fi';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -19,6 +20,7 @@ import {
   Calendar,
   Appointment,
 } from './styles';
+import { ThemeConsumer } from 'styled-components';
 
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
@@ -41,8 +43,9 @@ const months = [
 const Dashboard: React.FC = () => {
   const [selectedDDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [monthAvailability, setMonthAvailability] = useState([]);
 
-  const { signOut, user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const handleMonthChange = useCallback((month: Date) => {
     setCurrentMonth(month);
@@ -53,6 +56,19 @@ const Dashboard: React.FC = () => {
       setSelectedDate(day);
     }
   }, []);
+
+  useEffect(() => {
+    api
+      .get(`/providers/${user?.id}/month-availability`, {
+        params: {
+          year: currentMonth.getFullYear(),
+          month: currentMonth.getMonth() + 1,
+        },
+      })
+      .then((response) => {
+        setMonthAvailability(response.data);
+      });
+  }, [currentMonth]);
 
   return (
     <Container>

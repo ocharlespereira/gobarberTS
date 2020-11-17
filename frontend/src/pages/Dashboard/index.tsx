@@ -84,8 +84,11 @@ const Dashboard: React.FC = () => {
       .map((monthDay) => {
         const year = currentMonth.getFullYear();
         const month = currentMonth.getMonth();
-        const date = new Date(year, month, monthDay?.day);
+
+        return new Date(year, month, monthDay?.day);
       });
+
+    return dates;
   }, [currentMonth, monthAvailability]); //memorizar valor especifico e dizer quando quer q seja recarregado o valor
 
   return (
@@ -177,7 +180,7 @@ const Dashboard: React.FC = () => {
           <DayPicker
             weekdaysShort={['D', 'S', 'T', 'Q', 'Q', 'S', 'S']}
             fromMonth={new Date()}
-            disabledDays={[{ daysOfWeek: [0, 6] }]}
+            disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
             modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
             onDayClick={handleDateChange}
             selectedDays={selectedDDate}

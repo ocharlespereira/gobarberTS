@@ -33,6 +33,8 @@ const AuthProvider: React.FC = ({ children }) => {
       return { token, user: JSON.parse(user) }; // parse -> transforma em objeto
     }
 
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
     return {} as AuthState; // força typagem, hack
   });
 
@@ -46,6 +48,8 @@ const AuthProvider: React.FC = ({ children }) => {
 
     localStorage.setItem('@Gobarber2020:token', token);
     localStorage.setItem('@Gobarber2020:user', JSON.stringify(user)); // convert em string
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
 
     setData({ token, user });
   }, []);

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { FiClock, FiPower } from 'react-icons/fi';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -77,6 +77,16 @@ const Dashboard: React.FC = () => {
         setMonthAvailability(response.data);
       });
   }, [currentMonth, user?.id]);
+
+  const disabledDays = useMemo(() => {
+    const dates = monthAvailability
+      .filter((monthDay) => monthDay?.available === false)
+      .map((monthDay) => {
+        const year = currentMonth.getFullYear();
+        const month = currentMonth.getMonth();
+        const date = new Date(year, month, monthDay?.day);
+      });
+  }, [currentMonth, monthAvailability]); //memorizar valor especifico e dizer quando quer q seja recarregado o valor
 
   return (
     <Container>

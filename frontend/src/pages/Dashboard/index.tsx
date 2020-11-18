@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { isToday, format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import { FiClock, FiPower } from 'react-icons/fi';
 import DayPicker, { DayModifiers } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -47,7 +49,7 @@ const months = [
 ];
 
 const Dashboard: React.FC = () => {
-  const [selectedDDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
@@ -91,6 +93,10 @@ const Dashboard: React.FC = () => {
     return dates;
   }, [currentMonth, monthAvailability]); //memorizar valor especifico e dizer quando quer q seja recarregado o valor
 
+  const selectedateAsText = useMemo(() => {
+    return format(selectedD);
+  }, [selectedDate]);
+
   return (
     <Container>
       <Header>
@@ -115,7 +121,7 @@ const Dashboard: React.FC = () => {
         <Schedule>
           <h1>Horários agendados</h1>
           <p>
-            <span>Hoje</span>
+            <span>{isToday(selectedDate) && 'Hoje'}</span>
             <span>Dia 03</span>
             <span>Sexta-feira</span>
           </p>
@@ -183,7 +189,7 @@ const Dashboard: React.FC = () => {
             disabledDays={[{ daysOfWeek: [0, 6] }, ...disabledDays]}
             modifiers={{ available: { daysOfWeek: [1, 2, 3, 4, 5] } }}
             onDayClick={handleDateChange}
-            selectedDays={selectedDDate}
+            selectedDays={selectedDate}
             onMonthChange={handleMonthChange}
             months={months}
           />

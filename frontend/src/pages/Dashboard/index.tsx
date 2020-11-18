@@ -94,7 +94,9 @@ const Dashboard: React.FC = () => {
   }, [currentMonth, monthAvailability]); //memorizar valor especifico e dizer quando quer q seja recarregado o valor
 
   const selectedateAsText = useMemo(() => {
-    return format(selectedD);
+    return format(selectedDate, "'Dia' dd 'de' MMMM", {
+      locale: ptBR,
+    });
   }, [selectedDate]);
 
   return (
@@ -122,7 +124,7 @@ const Dashboard: React.FC = () => {
           <h1>Horários agendados</h1>
           <p>
             <span>{isToday(selectedDate) && 'Hoje'}</span>
-            <span>Dia 03</span>
+            <span>{selectedateAsText}</span>
             <span>Sexta-feira</span>
           </p>
 

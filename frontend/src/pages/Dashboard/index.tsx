@@ -22,12 +22,19 @@ import {
   Calendar,
   Appointment,
 } from './styles';
-import { ThemeConsumer } from 'styled-components';
-import { NumberLiteralType } from 'typescript';
 
 interface MonthAvailabilityItem {
   day: number;
   available: boolean;
+}
+
+interface Appointment {
+  id: string;
+  date: string;
+  user: {
+    name: string;
+    avatar_url: string;
+  };
 }
 
 const imgDefault =
@@ -51,7 +58,7 @@ const months = [
 const Dashboard: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState<Appointment>([]);
   const [monthAvailability, setMonthAvailability] = useState<
     MonthAvailabilityItem[]
   >([]);

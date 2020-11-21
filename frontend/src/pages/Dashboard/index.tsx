@@ -212,17 +212,22 @@ const Dashboard: React.FC = () => {
           <Section>
             <strong>Tarde</strong>
 
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-              <div>
-                <img src={imgDefault} alt="Charles Pereira" />
+            {afternoonAppointments.map((data) => (
+              <Appointment>
+                <span>
+                  <FiClock />
+                  {data.hourFormatted || '08:00'}
+                </span>
+                <div>
+                  <img
+                    src={data?.user?.avatar_url || imgDefault}
+                    alt={data?.user?.name || 'Charles Pereira'}
+                  />
 
-                <strong>Charles Pereira</strong>
-              </div>
-            </Appointment>
+                  <strong>{data?.user?.name || 'Charles Pereira'}</strong>
+                </div>
+              </Appointment>
+            ))}
           </Section>
         </Schedule>
         <Calendar>

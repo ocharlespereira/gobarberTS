@@ -32,6 +32,7 @@ interface MonthAvailabilityItem {
 interface Appointment {
   id: string;
   date: string;
+  hourFormatted: string;
   user: {
     name: string;
     avatar_url: string;
@@ -91,7 +92,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      .get('/appointments/me', {
+      .get<Appointment[]>('/appointments/me', {
         params: {
           year: selectedDate.getFullYear(),
           month: selectedDate.getMonth() + 1,
@@ -99,7 +100,14 @@ const Dashboard: React.FC = () => {
         },
       })
       .then((response) => {
-        setAppointments(response.data);
+        const appointmentsFormatted = response.data.map((appointment) => {
+          return {
+            ...appointment,
+            hourFormatted: format(parseISO(appointment.date), 'HH:mm'),
+          };
+        });
+
+        setAppointments(appointmentsFormatted);
       });
   }, [selectedDate]);
 
@@ -134,7 +142,7 @@ const Dashboard: React.FC = () => {
 
   const afternoonAppointments = useMemo(() => {
     return appointments.filter((appointment) => {
-      return parseISO(appointment.date).getHours() > 12;
+      return parseISO(appointment.date).getHours() >= 12;
     });
   }, [appointments]);
 
@@ -184,28 +192,22 @@ const Dashboard: React.FC = () => {
           <Section>
             <strong>Manhã</strong>
 
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-              <div>
-                <img src={imgDefault} alt="Charles Pereira" />
+            {morningAppointments.map((data) => (
+              <Appointment>
+                <span>
+                  <FiClock />
+                  {data.hourFormatted || '08:00'}
+                </span>
+                <div>
+                  <img
+                    src={data?.user?.avatar_url || imgDefault}
+                    alt={data?.user?.name || 'Charles Pereira'}
+                  />
 
-                <strong>Charles Pereira</strong>
-              </div>
-            </Appointment>
-            <Appointment>
-              <span>
-                <FiClock />
-                08:00
-              </span>
-              <div>
-                <img src={imgDefault} alt="Charles Pereira" />
-
-                <strong>Charles Pereira</strong>
-              </div>
-            </Appointment>
+                  <strong>{data?.user?.name || 'Charles Pereira'}</strong>
+                </div>
+              </Appointment>
+            ))}
           </Section>
           <Section>
             <strong>Tarde</strong>

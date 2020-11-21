@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { isToday, format, parseISO } from 'date-fns';
+import { isToday, format } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 import ptBR from 'date-fns/locale/pt-BR';
 import { FiClock, FiPower } from 'react-icons/fi';
 import DayPicker, { DayModifiers } from 'react-day-picker';
@@ -127,11 +128,15 @@ const Dashboard: React.FC = () => {
 
   const morningAppointments = useMemo(() => {
     return appointments.filter((appointment) => {
-      return parseISO;
+      return parseISO(appointment.date).getHours() < 12;
     });
   }, [appointments]);
 
-  const afternoonAppointments = useMemo(() => {}, [appointments]);
+  const afternoonAppointments = useMemo(() => {
+    return appointments.filter((appointment) => {
+      return parseISO(appointment.date).getHours() > 12;
+    });
+  }, [appointments]);
 
   return (
     <Container>

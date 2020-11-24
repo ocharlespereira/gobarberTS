@@ -175,19 +175,21 @@ const Dashboard: React.FC = () => {
             <span>{selectedWeekDay}</span>
           </p>
 
-          <NextAppointment>
-            <strong>Atendimento a seguir</strong>
-            <div>
-              <img src={imgDefault} alt="Charles Pereira" />
+          {isToday(selectedDate) && (
+            <NextAppointment>
+              <strong>Agendaemento a seguir</strong>
+              <div>
+                <img src={imgDefault} alt="Charles Pereira" />
 
-              <strong>Charles Pereira</strong>
+                <strong>Charles Pereira</strong>
 
-              <span>
-                <FiClock />
-                08:00
-              </span>
-            </div>
-          </NextAppointment>
+                <span>
+                  <FiClock />
+                  08:00
+                </span>
+              </div>
+            </NextAppointment>
+          )}
 
           <Section>
             <strong>Manhã</strong>

@@ -22,6 +22,7 @@ import {
   Calendar,
   Appointment,
 } from './styles';
+import { ModifierFlags } from 'typescript';
 
 interface MonthAvailabilityItem {
   day: number;
@@ -71,7 +72,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const handleDateChange = useCallback((day: Date, modifers: DayModifiers) => {
-    if (modifers.available) {
+    if (modifers.available && !modifers.disabled) {
       setSelectedDate(day);
     }
   }, []);

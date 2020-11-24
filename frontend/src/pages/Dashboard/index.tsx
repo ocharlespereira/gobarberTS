@@ -204,6 +204,10 @@ const Dashboard: React.FC = () => {
           <Section>
             <strong>Manhã</strong>
 
+            {morningAppointments?.length === 0 && (
+              <p>Nenhum agendamento neste período</p>
+            )}
+
             {morningAppointments.map((data) => (
               <Appointment>
                 <span>
@@ -223,6 +227,10 @@ const Dashboard: React.FC = () => {
           </Section>
           <Section>
             <strong>Tarde</strong>
+
+            {afternoonAppointments?.length === 0 && (
+              <p>Nenhum agendamento neste período</p>
+            )}
 
             {afternoonAppointments.map((data) => (
               <Appointment>

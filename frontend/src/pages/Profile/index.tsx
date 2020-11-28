@@ -16,7 +16,7 @@ import logoImg from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content, Background, AnimationContainer } from './styles';
+import { Container, Content } from './styles';
 
 interface ProfileFormData {
   name: string;
@@ -76,8 +76,6 @@ const Profile: React.FC = () => {
 
   return (
     <Container>
-      <Background />
-
       <Content>
         <img src={logoImg} alt="GoBarber" />
 

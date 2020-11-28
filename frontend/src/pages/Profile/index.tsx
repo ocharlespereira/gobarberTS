@@ -79,29 +79,27 @@ const Profile: React.FC = () => {
       <Background />
 
       <Content>
-        <AnimationContainer>
-          <img src={logoImg} alt="GoBarber" />
+        <img src={logoImg} alt="GoBarber" />
 
-          <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faça seu cadastro</h1>
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <h1>Faça seu cadastro</h1>
 
-            <Input name="name" icon={FiUser} placeholder="Nome" />
-            <Input name="email" icon={FiMail} placeholder="Email" />
-            <Input
-              name="password"
-              icon={FiLock}
-              type="password"
-              placeholder="Senha"
-            />
+          <Input name="name" icon={FiUser} placeholder="Nome" />
+          <Input name="email" icon={FiMail} placeholder="Email" />
+          <Input
+            name="password"
+            icon={FiLock}
+            type="password"
+            placeholder="Senha"
+          />
 
-            <Button type="submit">Cadastrar</Button>
-          </Form>
+          <Button type="submit">Cadastrar</Button>
+        </Form>
 
-          <Link to="/">
-            <FiArrowLeft />
-            Voltar para logon
-          </Link>
-        </AnimationContainer>
+        <Link to="/">
+          <FiArrowLeft />
+          Voltar para logon
+        </Link>
       </Content>
     </Container>
   );

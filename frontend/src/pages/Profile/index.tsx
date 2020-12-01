@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { FiArrowLeft, FiUser, FiMail, FiLock } from 'react-icons/fi';
+import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
@@ -8,13 +8,14 @@ import { Link, useHistory } from 'react-router-dom';
 import api from '../../services/api';
 
 import { useToast } from '../../hooks/toast';
+import { useAuth } from '../../hooks/auth';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
-import { Container, Content } from './styles';
+import { Container, Content, AvatarInput } from './styles';
 
 interface ProfileFormData {
   name: string;
@@ -22,10 +23,14 @@ interface ProfileFormData {
   password: string;
 }
 
+const imgDefault =
+  'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
+
 const Profile: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
+  const { user } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -76,6 +81,13 @@ const Profile: React.FC = () => {
     <Container>
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>
+          <AvatarInput>
+            <img src={user?.avatar_url || imgDefault} alt={user?.name} />
+            <button type="button">
+              <FiCamera />
+            </button>
+          </AvatarInput>
+
           <h1>Meu perfil</h1>
 
           <Input name="name" icon={FiUser} placeholder="Nome" />

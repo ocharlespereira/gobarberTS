@@ -2,16 +2,23 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-  /* height: 100vh;
-
-  display: flex;
-  align-items: stretch; */
-
   > header {
     height: 144px;
     background: #28262e;
     display: flex;
     align-items: center;
+
+    div {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+
+      svg {
+        color: #999591;
+        width: 25px;
+        height: 25px;
+      }
+    }
   }
 `;
 

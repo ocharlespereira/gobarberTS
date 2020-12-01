@@ -11,8 +11,6 @@ import { useToast } from '../../hooks/toast';
 
 import getValidationErrors from '../../utils/getValidationErrors';
 
-import logoImg from '../../assets/logo.svg';
-
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
@@ -77,10 +75,8 @@ const Profile: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={logoImg} alt="GoBarber" />
-
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <h1>Faça seu cadastro</h1>
+          <h1>Meu perfil</h1>
 
           <Input name="name" icon={FiUser} placeholder="Nome" />
           <Input name="email" icon={FiMail} placeholder="Email" />
@@ -96,7 +92,7 @@ const Profile: React.FC = () => {
 
         <Link to="/">
           <FiArrowLeft />
-          Voltar para logon
+          Confirmar mudanças
         </Link>
       </Content>
     </Container>

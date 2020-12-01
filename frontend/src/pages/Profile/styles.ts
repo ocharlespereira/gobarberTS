@@ -13,9 +13,9 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
 
   width: 100%;
-  max-width: 700px;
 
   form {
     margin: 80px 0;
@@ -24,6 +24,8 @@ export const Content = styled.div`
 
     h1 {
       margin-bottom: 24px;
+      font-size: 20px;
+      text-align: left;
     }
 
     a {

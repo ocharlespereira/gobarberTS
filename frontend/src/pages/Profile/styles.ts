@@ -62,5 +62,15 @@ export const AvatarInput = styled.div`
     border-radius: 50%;
     right: 0;
     bottom: 0;
+    border: 0;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      background: ${shade(0.2, '#ff9000')};
+    }
   }
 `;

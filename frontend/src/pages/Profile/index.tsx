@@ -79,6 +79,12 @@ const Profile: React.FC = () => {
 
   return (
     <Container>
+      <header>
+        <Link to="/dashboard">
+          <FiArrowLeft />
+        </Link>
+      </header>
+
       <Content>
         <Form ref={formRef} onSubmit={handleSubmit}>
           <AvatarInput>

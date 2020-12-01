@@ -2,10 +2,17 @@ import styled from 'styled-components';
 import { shade } from 'polished';
 
 export const Container = styled.div`
-  height: 100vh;
+  /* height: 100vh;
 
   display: flex;
-  align-items: stretch;
+  align-items: stretch; */
+
+  > header {
+    height: 144px;
+    background: #28262e;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const Content = styled.div`
@@ -13,7 +20,7 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: -175px auto 0;
 
   width: 100%;
 

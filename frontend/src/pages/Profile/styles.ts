@@ -38,5 +38,9 @@ export const Content = styled.div`
         color: ${shade(0.2, '#f4ede8')};
       }
     }
+
+    input[name='old_password'] {
+      margin-top: 24px;
+    }
   }
 `;

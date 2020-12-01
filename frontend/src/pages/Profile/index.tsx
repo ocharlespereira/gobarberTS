@@ -81,19 +81,27 @@ const Profile: React.FC = () => {
           <Input name="name" icon={FiUser} placeholder="Nome" />
           <Input name="email" icon={FiMail} placeholder="Email" />
           <Input
+            containerStyle={{ marginTop: 24 }}
+            name="old_password"
+            icon={FiLock}
+            type="password"
+            placeholder="Senha atual"
+          />
+          <Input
             name="password"
             icon={FiLock}
             type="password"
-            placeholder="Senha"
+            placeholder="Nova senha"
+          />
+          <Input
+            name="password_confirmation"
+            icon={FiLock}
+            type="password"
+            placeholder="Confirmar senha"
           />
 
           <Button type="submit">Cadastrar</Button>
         </Form>
-
-        <Link to="/">
-          <FiArrowLeft />
-          Confirmar mudanças
-        </Link>
       </Content>
     </Container>
   );

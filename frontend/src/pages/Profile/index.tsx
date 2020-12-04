@@ -61,7 +61,9 @@ const Profile: React.FC = () => {
           abortEarly: false,
         });
 
-        await api.put('/profile', data);
+        const res = await api.put('/profile', data);
+
+        updateUser(res?.data);
 
         history.push('/dashboard');
 
@@ -84,8 +86,7 @@ const Profile: React.FC = () => {
         addToast({
           type: 'info',
           title: 'Erro na atualização',
-          description:
-            'Ocorreu um erro ao atualizar o cadastro, tente novamente',
+          description: 'Ocorreu um erro ao atualizar o perfil, tente novamente',
         });
       }
     },

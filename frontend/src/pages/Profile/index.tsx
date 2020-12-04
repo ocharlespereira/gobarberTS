@@ -61,15 +61,15 @@ const Profile: React.FC = () => {
           abortEarly: false,
         });
 
-        // cadastro de novo usuário
-        await api.post('/users', data);
+        await api.put('/profile', data);
 
-        history.push('/');
+        history.push('/dashboard');
 
         addToast({
           type: 'success',
-          title: 'Cadastro realizado com sucesso!',
-          description: 'Você pode fazer o seu logon no Gobarber',
+          title: 'Perfil atualizado!',
+          description:
+            'Suas informações do perfil foram atualizadas com sucesso!',
         });
       } catch (err) {
         // verifica se o erro é originado do Yup
@@ -83,8 +83,9 @@ const Profile: React.FC = () => {
         // disparar um toast
         addToast({
           type: 'info',
-          title: 'Erro no cadastro',
-          description: 'Ocorreu um erro ao fazer o cadastro, tente novamente',
+          title: 'Erro na atualização',
+          description:
+            'Ocorreu um erro ao atualizar o cadastro, tente novamente',
         });
       }
     },

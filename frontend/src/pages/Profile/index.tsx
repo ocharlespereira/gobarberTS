@@ -30,7 +30,7 @@ const Profile: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
   const history = useHistory();
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -84,7 +84,9 @@ const Profile: React.FC = () => {
 
         data.append('avatar', e.target.files[0]);
 
-        api.patch('/users/avatar', data).then(() => {
+        api.patch('/users/avatar', data).then((response) => {
+          updateUser(response?.data);
+
           addToast({
             type: 'success',
             title: 'Avatar atualizado!',
@@ -92,7 +94,7 @@ const Profile: React.FC = () => {
         });
       }
     },
-    [addToast],
+    [addToast, updateUser],
   );
 
   return (

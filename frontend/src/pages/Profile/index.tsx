@@ -48,10 +48,13 @@ const Profile: React.FC = () => {
             then: Yup.string().required('Campo obrigatório'),
             otherwise: Yup.string(),
           }),
-          password_confirmation: Yup.string().oneOf(
-            [Yup.ref('password'), null],
-            'Confirmação incorreta',
-          ),
+          password_confirmation: Yup.string()
+            .when('old_password', {
+              is: (val) => !!val.length,
+              then: Yup.string().required('Campo obrigatório'),
+              otherwise: Yup.string(),
+            })
+            .oneOf([Yup.ref('password'), null], 'Confirmação incorreta'),
         });
 
         await schema.validate(data, {

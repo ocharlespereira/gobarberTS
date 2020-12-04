@@ -20,7 +20,9 @@ import { Container, Content, AvatarInput } from './styles';
 interface ProfileFormData {
   name: string;
   email: string;
+  old_password: string;
   password: string;
+  password_confirmation: string;
 }
 
 const imgDefault =
@@ -40,7 +42,9 @@ const Profile: React.FC = () => {
         const schema = Yup.object().shape({
           name: Yup.string().required('Nome obrigatório'),
           email: Yup.string().required('E-mail obrigatório').email(),
-          password: Yup.string().required('Senha Obrigatória'),
+          old_password: Yup.string(),
+          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+          password_confirmation: Yup.string().min(6, 'No mínimo 6 dígitos'),
         });
 
         await schema.validate(data, {

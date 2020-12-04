@@ -43,8 +43,15 @@ const Profile: React.FC = () => {
           name: Yup.string().required('Nome obrigatório'),
           email: Yup.string().required('E-mail obrigatório').email(),
           old_password: Yup.string(),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
-          password_confirmation: Yup.string().min(6, 'No mínimo 6 dígitos'),
+          password: Yup.string().when('old_password', {
+            is: (val) => !!val.length,
+            then: Yup.string().required('Campo obrigatório'),
+            otherwise: Yup.string(),
+          }),
+          password_confirmation: Yup.string().oneOf(
+            [Yup.ref('password'), null],
+            'Confirmação incorreta',
+          ),
         });
 
         await schema.validate(data, {

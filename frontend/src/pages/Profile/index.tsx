@@ -16,6 +16,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Container, Content, AvatarInput } from './styles';
+import { sortAndDeduplicateDiagnostics } from 'typescript';
 
 interface ProfileFormData {
   name: string;
@@ -61,7 +62,29 @@ const Profile: React.FC = () => {
           abortEarly: false,
         });
 
-        const res = await api.put('/profile', data);
+        const {
+          name,
+          email,
+          old_password,
+          password,
+          password_confirmation,
+        } = data;
+
+        const formData = Object.assign(
+          {
+            name,
+            email,
+          },
+          old_password
+            ? {
+                old_password,
+                password,
+                password_confirmation,
+              }
+            : {},
+        );
+
+        const res = await api.put('/profile', formData);
 
         updateUser(res?.data);
 

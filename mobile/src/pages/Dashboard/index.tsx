@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../hooks/auth';
 
@@ -13,6 +14,11 @@ import {
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
+  const { navigate } = useNavigation();
+
+  const navigateProfile = useCallback(() => {
+    navigate('Profile');
+  }, [navigate]);
 
   return (
     <Container>
@@ -22,7 +28,11 @@ const Dashboard: React.FC = () => {
           <UserName>{user?.name || 'Charles Pereira'}</UserName>
         </HeaderTitle>
 
-        <ProfileButton onPress={() => {}}>
+        <ProfileButton
+          onPress={() => {
+            navigateProfile;
+          }}
+        >
           <UserAvatar source={{ uri: user?.avatar_url }} />
         </ProfileButton>
       </Header>

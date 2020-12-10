@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 
-import { useAuth } from 'src/hooks/auth';
+import { useAuth } from '../hooks/auth';
 import AuthRoutes from './auth.routes';
 
 import AppRoutes from './app.routes';

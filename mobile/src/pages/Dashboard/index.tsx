@@ -12,6 +12,9 @@ import {
   UserAvatar,
 } from './styles';
 
+const imgDefault =
+  'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
+
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
   const { navigate } = useNavigation();
@@ -33,7 +36,7 @@ const Dashboard: React.FC = () => {
             navigateProfile;
           }}
         >
-          <UserAvatar source={{ uri: user?.avatar_url }} />
+          <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
         </ProfileButton>
       </Header>
     </Container>

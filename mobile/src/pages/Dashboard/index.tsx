@@ -12,9 +12,10 @@ import {
   UserName,
   ProfileButton,
   UserAvatar,
+  ProvidersList,
 } from './styles';
 
-interface Provider {
+export interface Provider {
   id: string;
   name: string;
   avatar_url: string;
@@ -56,6 +57,12 @@ const Dashboard: React.FC = () => {
           <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
         </ProfileButton>
       </Header>
+
+      <ProvidersList
+        data={providers}
+        keyExtractor={(provider) => provider?.id}
+        renderItem={({ item }) => <UserName>{item?.name}</UserName>}
+      />
     </Container>
   );
 };

@@ -1,7 +1,9 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../hooks/auth';
+
+import api from '../../services/api';
 
 import {
   Container,
@@ -12,16 +14,31 @@ import {
   UserAvatar,
 } from './styles';
 
+interface Provider {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
+
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const Dashboard: React.FC = () => {
+  const [providers, setProviders] = useState<Provider[]>([]);
+
   const { signOut, user } = useAuth();
   const { navigate } = useNavigation();
 
+  useEffect(() => {
+    api.get('providers').then((res) => {
+      setProviders(res.data);
+    });
+  }, []);
+
   const navigateProfile = useCallback(() => {
-    navigate('Profile');
-  }, [navigate]);
+    // navigate('Profile');
+    signOut();
+  }, [signOut]);
 
   return (
     <Container>

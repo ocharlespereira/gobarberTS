@@ -56,9 +56,16 @@ export const ProviderAvatar = styled.Image`
   border-radius: 36px;
 `;
 
-export const ProviderInfo = styled.View``;
+export const ProviderInfo = styled.View`
+  flex: 1;
+  margin-left: 20px;
+`;
 
-export const ProviderName = styled.Text``;
+export const ProviderName = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  font-size: 18px;
+  color: #f4ede8;
+`;
 
 export const ProviderMeta = styled.View``;
 

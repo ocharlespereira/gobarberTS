@@ -37,4 +37,29 @@ export const UserAvatar = styled.Image`
   border-radius: 28px;
 `;
 
-export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)``;
+export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
+  padding: 32px 24px 16px;
+`;
+
+export const ProviderContainer = styled.View`
+  background: #3e3b47;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 16px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ProviderAvatar = styled.Image`
+  width: 72px;
+  height: 72px;
+  border-radius: 36px;
+`;
+
+export const ProviderInfo = styled.View``;
+
+export const ProviderName = styled.Text``;
+
+export const ProviderMeta = styled.View``;
+
+export const ProviderMetaText = styled.Text``;

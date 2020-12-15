@@ -14,6 +14,12 @@ import {
   ProfileButton,
   UserAvatar,
   ProvidersList,
+  ProviderContainer,
+  ProviderAvatar,
+  ProviderInfo,
+  ProviderName,
+  ProviderMeta,
+  ProviderMetaText,
 } from './styles';
 
 export interface Provider {
@@ -22,18 +28,11 @@ export interface Provider {
   avatar_url: string;
 }
 
-const defaults = [
-  {
-    id: 1,
-    name: 'Charles Pereira',
-  },
-];
-
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const Dashboard: React.FC = () => {
-  const [providers, setProviders] = useState<Provider[]>([defaults]);
+  const [providers, setProviders] = useState<Provider[]>([]);
 
   const { signOut, user } = useAuth();
   const { navigate } = useNavigation();
@@ -76,10 +75,29 @@ const Dashboard: React.FC = () => {
             />
 
             <ProviderInfo>
-              <ProviderName>{provider?.name}</ProviderName>
+              <ProviderName>{provider?.name || 'Charles Pereira'}</ProviderName>
 
               <ProviderMeta>
                 <Icon name="calendar" size={14} color="#ff9000" />
+                <ProviderMetaText>Segunda à sexta</ProviderMetaText>
+              </ProviderMeta>
+
+              <ProviderMeta>
+                <Icon name="clock" size={14} color="#ff9000" />
+                <ProviderMetaText>08h às 18h</ProviderMetaText>
+              </ProviderMeta>
+            </ProviderInfo>
+            <ProviderInfo>
+              <ProviderName>{provider?.name || 'Charles Pereira'}</ProviderName>
+
+              <ProviderMeta>
+                <Icon name="calendar" size={14} color="#ff9000" />
+                <ProviderMetaText>Segunda à sexta</ProviderMetaText>
+              </ProviderMeta>
+
+              <ProviderMeta>
+                <Icon name="clock" size={14} color="#ff9000" />
+                <ProviderMetaText>08h às 18h</ProviderMetaText>
               </ProviderMeta>
             </ProviderInfo>
           </ProviderContainer>

@@ -67,6 +67,14 @@ export const ProviderName = styled.Text`
   color: #f4ede8;
 `;
 
-export const ProviderMeta = styled.View``;
+export const ProviderMeta = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 8px;
+`;
 
-export const ProviderMetaText = styled.Text``;
+export const ProviderMetaText = styled.Text`
+  margin-left: 8px;
+  font-family: 'RobotoSlab-Regular';
+  color: #999591;
+`;

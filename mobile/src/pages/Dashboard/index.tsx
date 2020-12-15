@@ -33,20 +33,28 @@ const defaults = [
     id: 1,
     name: 'Charles Pereira',
   },
+  {
+    id: 2,
+    name: 'Francisco Costa',
+  },
+  {
+    id: 3,
+    name: 'Isaac Barbosa',
+  },
 ];
 
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const Dashboard: React.FC = () => {
-  const [providers, setProviders] = useState<Provider[]>([defaults[0]]);
+  const [providers, setProviders] = useState<Provider[]>(defaults);
 
   const { signOut, user } = useAuth();
   const { navigate } = useNavigation();
 
   useEffect(() => {
     api.get('providers').then((res) => {
-      setProviders(res.data);
+      setProviders([res.data]);
     });
   }, []);
 
@@ -77,25 +85,6 @@ const Dashboard: React.FC = () => {
         keyExtractor={(provider) => provider?.id}
         renderItem={({ item: provider }) => (
           <>
-            <ProviderContainer onPress={() => {}}>
-              <ProviderAvatar
-                source={{ uri: provider?.avatar_url || imgDefault }}
-              />
-
-              <ProviderInfo>
-                <ProviderName>{provider?.name}</ProviderName>
-
-                <ProviderMeta>
-                  <Icon name="calendar" size={14} color="#ff9000" />
-                  <ProviderMetaText>Segunda à sexta</ProviderMetaText>
-                </ProviderMeta>
-
-                <ProviderMeta>
-                  <Icon name="clock" size={14} color="#ff9000" />
-                  <ProviderMetaText>08h às 18h</ProviderMetaText>
-                </ProviderMeta>
-              </ProviderInfo>
-            </ProviderContainer>
             <ProviderContainer onPress={() => {}}>
               <ProviderAvatar
                 source={{ uri: provider?.avatar_url || imgDefault }}

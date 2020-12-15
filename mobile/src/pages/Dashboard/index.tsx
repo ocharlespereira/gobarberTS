@@ -14,6 +14,7 @@ import {
   ProfileButton,
   UserAvatar,
   ProvidersList,
+  ProvidersListTitle,
   ProviderContainer,
   ProviderAvatar,
   ProviderInfo,
@@ -82,6 +83,9 @@ const Dashboard: React.FC = () => {
 
       <ProvidersList
         data={providers}
+        ListHeaderComponent={
+          <ProvidersListTitle>Cabeleireiros</ProvidersListTitle>
+        }
         keyExtractor={(provider) => provider?.id}
         renderItem={({ item: provider }) => (
           <>

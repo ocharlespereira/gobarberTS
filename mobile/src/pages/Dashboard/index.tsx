@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
+import Icon from 'react-native-vector-icons/Feather';
 import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
@@ -21,11 +22,18 @@ export interface Provider {
   avatar_url: string;
 }
 
+const defaults = [
+  {
+    id: 1,
+    name: 'Charles Pereira',
+  },
+];
+
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const Dashboard: React.FC = () => {
-  const [providers, setProviders] = useState<Provider[]>([]);
+  const [providers, setProviders] = useState<Provider[]>([defaults]);
 
   const { signOut, user } = useAuth();
   const { navigate } = useNavigation();
@@ -61,7 +69,21 @@ const Dashboard: React.FC = () => {
       <ProvidersList
         data={providers}
         keyExtractor={(provider) => provider?.id}
-        renderItem={({ item }) => <UserName>{item?.name}</UserName>}
+        renderItem={({ item: provider }) => (
+          <ProviderContainer onPress={() => {}}>
+            <ProviderAvatar
+              source={{ uri: provider?.avatar_url || imgDefault }}
+            />
+
+            <ProviderInfo>
+              <ProviderName>{provider?.name}</ProviderName>
+
+              <ProviderMeta>
+                <Icon name="calendar" size={14} color="#ff9000" />
+              </ProviderMeta>
+            </ProviderInfo>
+          </ProviderContainer>
+        )}
       />
     </Container>
   );

@@ -12,6 +12,7 @@ import {
   HeaderTitle,
   UserAvatar,
   ProvidersListContainer,
+  ProvidersList,
 } from './styles';
 
 export interface Provider {
@@ -58,13 +59,15 @@ const CreateAppointment: React.FC = () => {
         <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
       </Header>
 
-      <ProvidersListContainer
-        data={providers}
-        keyExtrator={(provider) => provider?.id}
-        renderItem={({ item: provider }) => (
-          <HeaderTitle>{provider?.name || 'Charles Pereira'}</HeaderTitle>
-        )}
-      />
+      <ProvidersListContainer>
+        <ProvidersList
+          data={providers}
+          keyExtrator={(provider) => provider?.id}
+          renderItem={({ item: provider }) => (
+            <HeaderTitle>{provider?.name || 'Charles Pereira'}</HeaderTitle>
+          )}
+        />
+      </ProvidersListContainer>
     </Container>
   );
 };

@@ -25,6 +25,21 @@ interface RouteParams {
   providerId: string;
 }
 
+const defaults = [
+  {
+    id: 1,
+    name: 'Charles Pereira',
+  },
+  {
+    id: 2,
+    name: 'Francisco Costa',
+  },
+  {
+    id: 3,
+    name: 'Isaac Barbosa',
+  },
+];
+
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
@@ -61,8 +76,9 @@ const CreateAppointment: React.FC = () => {
 
       <ProvidersListContainer>
         <ProvidersList
+          horizontal
           data={providers}
-          keyExtrator={(provider) => provider?.id}
+          keyExtractor={(provider) => provider?.id}
           renderItem={({ item: provider }) => (
             <HeaderTitle>{provider?.name || 'Charles Pereira'}</HeaderTitle>
           )}

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -11,6 +11,7 @@ import {
   BackButton,
   HeaderTitle,
   UserAvatar,
+  ProvidersListContainer,
 } from './styles';
 
 export interface Provider {
@@ -56,6 +57,14 @@ const CreateAppointment: React.FC = () => {
 
         <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
       </Header>
+
+      <ProvidersListContainer
+        data={providers}
+        keyExtrator={(provider) => provider?.id}
+        renderItem={({ item: provider }) => (
+          <HeaderTitle>{provider?.name || 'Charles Pereira'}</HeaderTitle>
+        )}
+      />
     </Container>
   );
 };

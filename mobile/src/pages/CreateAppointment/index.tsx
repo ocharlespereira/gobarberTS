@@ -77,6 +77,7 @@ const CreateAppointment: React.FC = () => {
       <ProvidersListContainer>
         <ProvidersList
           horizontal
+          showsHorizontalScrollIndicator={false}
           data={providers}
           keyExtractor={(provider) => provider?.id}
           renderItem={({ item: provider }) => (

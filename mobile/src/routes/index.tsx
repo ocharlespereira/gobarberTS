@@ -17,7 +17,9 @@ const Routes: React.FC = () => {
     );
   }
 
-  return user ? <AppRoutes /> : <AuthRoutes />;
+  // TODO: voltar esta linha 21 para ativar authenticação
+  // return user ? <AppRoutes /> : <AuthRoutes />;
+  return <AppRoutes />;
 };
 
 export default Routes;

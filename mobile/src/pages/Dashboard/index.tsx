@@ -90,36 +90,32 @@ const Dashboard: React.FC = () => {
 
       <ProvidersList
         data={providers}
+        keyExtractor={(provider) => provider.id}
         ListHeaderComponent={
           <ProvidersListTitle>Cabeleireiros</ProvidersListTitle>
         }
-        keyExtractor={(provider) => provider?.id}
         renderItem={({ item: provider }) => (
-          <>
-            <ProviderContainer
-              onPress={() => {
-                navigateToCreateAppointment(provider?.id);
-              }}
-            >
-              <ProviderAvatar
-                source={{ uri: provider?.avatar_url || imgDefault }}
-              />
+          <ProviderContainer
+            onPress={() => navigateToCreateAppointment(provider.id)}
+          >
+            <ProviderAvatar
+              source={{ uri: provider?.avatar_url || imgDefault }}
+            />
 
-              <ProviderInfo>
-                <ProviderName>{provider?.name}</ProviderName>
+            <ProviderInfo>
+              <ProviderName>{provider?.name}</ProviderName>
 
-                <ProviderMeta>
-                  <Icon name="calendar" size={14} color="#ff9000" />
-                  <ProviderMetaText>Segunda à sexta</ProviderMetaText>
-                </ProviderMeta>
+              <ProviderMeta>
+                <Icon name="calendar" size={14} color="#ff9000" />
+                <ProviderMetaText>Segunda à sexta</ProviderMetaText>
+              </ProviderMeta>
 
-                <ProviderMeta>
-                  <Icon name="clock" size={14} color="#ff9000" />
-                  <ProviderMetaText>08h às 18h</ProviderMetaText>
-                </ProviderMeta>
-              </ProviderInfo>
-            </ProviderContainer>
-          </>
+              <ProviderMeta>
+                <Icon name="clock" size={14} color="#ff9000" />
+                <ProviderMetaText>08h às 18h</ProviderMetaText>
+              </ProviderMeta>
+            </ProviderInfo>
+          </ProviderContainer>
         )}
       />
     </Container>

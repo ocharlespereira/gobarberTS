@@ -1,8 +1,9 @@
-import React from 'react';
-import { useRoute } from '@react-navigation/native';
+import React, { useCallback, useEffect } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 
 import {
   Container,
@@ -12,6 +13,12 @@ import {
   UserAvatar,
 } from './styles';
 
+export interface Provider {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
+
 interface RouteParams {
   providerId: string;
 }
@@ -20,16 +27,28 @@ const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const CreateAppointment: React.FC = () => {
+  const [providers, setProviders] = useState<Provider[]>(defaults);
+
   const { user } = useAuth();
   const route = useRoute();
+  const { goBack } = useNavigation();
+
   const { providerId } = route.params as RouteParams;
 
-  console.log('routeParams', providerId);
+  useEffect(() => {
+    api.get('providers').then((res) => {
+      setProviders([res.data]);
+    });
+  }, []);
+
+  const navigateBack = useCallback(() => {
+    goBack();
+  }, [goBack]);
 
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}}>
+        <BackButton onPress={navigateBack}>
           <Icon name="chevron-left" size={20} color="#999591" />
         </BackButton>
 

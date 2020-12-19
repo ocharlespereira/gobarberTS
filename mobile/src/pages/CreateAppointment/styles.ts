@@ -40,3 +40,25 @@ export const ProvidersListContainer = styled.View`
 export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
   padding: 32px 24px;
 `;
+
+export const ProviderContainer = styled.View`
+  background: #3e3b47;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 12px;
+  margin-right: 16px;
+  border-radius: 10px;
+`;
+
+export const ProviderAvatar = styled.Image`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+`;
+
+export const ProviderName = styled.Text`
+  margin-left: 8px;
+  font-family: 'RobotoSlab-Medium';
+  font-size: 16px;
+  color: #f4ede8;
+`;

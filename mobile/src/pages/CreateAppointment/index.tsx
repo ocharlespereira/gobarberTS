@@ -13,6 +13,9 @@ import {
   UserAvatar,
   ProvidersListContainer,
   ProvidersList,
+  ProviderContainer,
+  ProviderAvatar,
+  ProviderName
 } from './styles';
 
 export interface Provider {
@@ -83,6 +86,7 @@ const CreateAppointment: React.FC = () => {
           renderItem={({ item: provider }) => (
             <HeaderTitle>{provider?.name || 'Charles Pereira'}</HeaderTitle>
             <ProviderContainer>
+              <ProviderAvatar></ProviderAvatar>
               <ProviderName>{provider?.name}</ProviderName>
             </ProviderContainer>
 

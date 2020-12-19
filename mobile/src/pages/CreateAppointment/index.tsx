@@ -47,13 +47,15 @@ const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const CreateAppointment: React.FC = () => {
-  const [providers, setProviders] = useState<Provider[]>(defaults);
-
   const { user } = useAuth();
   const route = useRoute();
   const { goBack } = useNavigation();
 
   const { providerId } = route.params as RouteParams;
+
+  const [providers, setProviders] = useState<Provider[]>(defaults);
+  const [selectedProvider, setSelectedProvider] = useState(providerId);
+  // setSelectedProvider(providerId);
 
   useEffect(() => {
     api.get('providers').then((res) => {
@@ -84,11 +86,13 @@ const CreateAppointment: React.FC = () => {
           data={providers}
           keyExtractor={(provider) => provider?.id}
           renderItem={({ item: provider }) => (
-            <ProviderContainer>
+            <ProviderContainer selected={provider.id === selectedProvider}>
               <ProviderAvatar
                 source={{ uri: user?.avatar_url || imgDefault }}
               />
-              <ProviderName>{provider?.name || 'Charles Pereira'}</ProviderName>
+              <ProviderName selected={provider.id === selectedProvider}>
+                {provider?.name || 'Charles Pereira'}
+              </ProviderName>
             </ProviderContainer>
           )}
         />

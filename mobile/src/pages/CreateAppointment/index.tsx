@@ -82,6 +82,10 @@ const CreateAppointment: React.FC = () => {
           keyExtractor={(provider) => provider?.id}
           renderItem={({ item: provider }) => (
             <HeaderTitle>{provider?.name || 'Charles Pereira'}</HeaderTitle>
+            <ProviderContainer>
+              <ProviderName>{provider?.name}</ProviderName>
+            </ProviderContainer>
+
           )}
         />
       </ProvidersListContainer>

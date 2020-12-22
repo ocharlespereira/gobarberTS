@@ -19,6 +19,8 @@ import {
   ProviderName,
   Calendar,
   Title,
+  OpenDatePickerButton,
+  OpenDatePickerButtonText,
 } from './styles';
 
 export interface Provider {
@@ -77,6 +79,10 @@ const CreateAppointment: React.FC = () => {
     setSelectedProvider(providerId);
   }, []);
 
+  const handleOpenDatePicker = useCallback(() => {
+    setShowDatePicker(true);
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -114,12 +120,18 @@ const CreateAppointment: React.FC = () => {
       <Calendar>
         <Title>Escolha a data</Title>
 
+        <OpenDatePickerButton onPress={handleOpenDatePicker}>
+          <OpenDatePickerButtonText>
+            Selecionar outra data
+          </OpenDatePickerButtonText>
+        </OpenDatePickerButton>
+
         {showDatePicker && (
           <DateTimePicker
             mode="date"
             value={new Date()}
             display="calendar"
-            // textColor="#f4ede8"
+            textColor="#f4ede8"
           />
         )}
       </Calendar>

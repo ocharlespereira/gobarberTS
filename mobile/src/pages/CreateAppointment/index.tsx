@@ -89,7 +89,7 @@ const CreateAppointment: React.FC = () => {
         },
       })
       .then((res) => setAvailability(res?.data));
-  }, []);
+  }, [selectedDate, selectedProvider]);
 
   const navigateBack = useCallback(() => {
     goBack();

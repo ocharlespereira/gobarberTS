@@ -73,6 +73,16 @@ const CreateAppointment: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    api.get(`providers/${selectedProvider}/day-availability`, {
+      params: {
+        year: selectedDate.getFullYear(),
+        month: selectedDate.getMonth() + 1,
+        day: selectedDate.getDate(),
+      },
+    });
+  }, []);
+
   const navigateBack = useCallback(() => {
     goBack();
   }, [goBack]);

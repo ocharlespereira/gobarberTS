@@ -117,7 +117,11 @@ const CreateAppointment: React.FC = () => {
   );
 
   const morningAvailability = useMemo(() => {
-    return availability.filter(({ hour }) => hour < 12);
+    return availability
+      .filter(({ hour }) => hour < 12)
+      .map(({ hour, available }) => {
+        hour, available;
+      });
   }, [availability]);
 
   return (

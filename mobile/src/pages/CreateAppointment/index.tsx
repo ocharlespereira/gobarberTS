@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Platform } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
@@ -115,6 +115,10 @@ const CreateAppointment: React.FC = () => {
     },
     [],
   );
+
+  const morningAvailability = useMemo(() => {
+    return availability.filter(({ hour }) => hour < 12);
+  }, [availability]);
 
   return (
     <Container>

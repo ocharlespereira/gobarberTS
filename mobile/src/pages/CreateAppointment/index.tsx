@@ -92,6 +92,7 @@ const CreateAppointment: React.FC = () => {
   );
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedHour, setSelectedHour] = useState(0);
   const [providers, setProviders] = useState<Provider[]>(defaults);
   const [selectedProvider, setSelectedProvider] = useState(
     routeParams.providerId,
@@ -169,6 +170,10 @@ const CreateAppointment: React.FC = () => {
       });
   }, [availability]);
 
+  const handleSelectHour = useCallback((hour: number) => {
+    setSelectedHour(hour);
+  }, []);
+
   return (
     <Container>
       <Header>
@@ -231,8 +236,13 @@ const CreateAppointment: React.FC = () => {
             <SectionTitle>Manhã</SectionTitle>
 
             <SectionContent>
-              {morningAvailability.map(({ hourFormatted, available }) => (
-                <Hour available={available} key={hourFormatted}>
+              {morningAvailability.map(({ hourFormatted, hour, available }) => (
+                <Hour
+                  selected={selectedHour === hour}
+                  available={available}
+                  key={hourFormatted}
+                  onPress={() => handleSelectHour(hour)}
+                >
                   <HourText>{hourFormatted}</HourText>
                 </Hour>
               ))}
@@ -242,11 +252,18 @@ const CreateAppointment: React.FC = () => {
             <SectionTitle>Tarde</SectionTitle>
 
             <SectionContent>
-              {afternoonAvailability.map(({ hourFormatted, available }) => (
-                <Hour available={available} key={hourFormatted}>
-                  <HourText>{hourFormatted}</HourText>
-                </Hour>
-              ))}
+              {afternoonAvailability.map(
+                ({ hourFormatted, hour, available }) => (
+                  <Hour
+                    selected={selectedHour === hour}
+                    available={available}
+                    key={hourFormatted}
+                    onPress={() => handleSelectHour(hour)}
+                  >
+                    <HourText>{hourFormatted}</HourText>
+                  </Hour>
+                ),
+              )}
             </SectionContent>
           </Section>
         </Schedule>

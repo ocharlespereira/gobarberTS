@@ -122,7 +122,7 @@ export const SectionContent = styled.ScrollView.attrs({
   showsHorizontalScrollIndicator: false,
 })``;
 
-export const Hour = styled.View<HourProps>`
+export const Hour = styled(RectButton)<HourProps>`
   padding: 12px;
   background: #3e3b47;
   border-radius: 10px;

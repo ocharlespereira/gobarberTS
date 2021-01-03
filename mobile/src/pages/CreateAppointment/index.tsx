@@ -23,6 +23,12 @@ import {
   Title,
   OpenDatePickerButton,
   OpenDatePickerButtonText,
+  Schedule,
+  Section,
+  SectionTitle,
+  SectionContent,
+  Hour,
+  HourText,
 } from './styles';
 
 export interface Provider {
@@ -55,6 +61,21 @@ const defaults = [
   },
 ];
 
+const defaultData = [
+  { hour: '08:00', available: false },
+  { hour: '09:00', available: true },
+  { hour: '10:00', available: true },
+  { hour: '11:00', available: false },
+  { hour: '12:00', available: false },
+  { hour: '13:00', available: false },
+  { hour: '14:00', available: false },
+  { hour: '15:00', available: true },
+  { hour: '16:00', available: true },
+  { hour: '17:00', available: false },
+  { hour: '18:00', available: true },
+  { hour: '19:00', available: false },
+];
+
 const imgDefault =
   'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
@@ -65,7 +86,9 @@ const CreateAppointment: React.FC = () => {
 
   const routeParams = route.params as RouteParams;
 
-  const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
+  const [availability, setAvailability] = useState<AvailabilityItem[]>(
+    defaultData,
+  );
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [providers, setProviders] = useState<Provider[]>(defaults);
@@ -89,7 +112,11 @@ const CreateAppointment: React.FC = () => {
           day: selectedDate.getDate(),
         },
       })
-      .then((res) => setAvailability(res?.data));
+      .then((res) => {
+        if (res?.data) {
+          setAvailability(res?.data);
+        }
+      });
   }, [selectedDate, selectedProvider]);
 
   const navigateBack = useCallback(() => {
@@ -195,13 +222,32 @@ const CreateAppointment: React.FC = () => {
         )}
       </Calendar>
 
-      {morningAvailability.map(({ hourFormatted }) => (
-        <Title key={hourFormatted}>{hourFormatted}</Title>
-      ))}
+      <Schedule>
+        <Title>Escolha o horário</Title>
 
-      {afternoonAvailability.map(({ hourFormatted }) => (
-        <Title key={hourFormatted}>{hourFormatted}</Title>
-      ))}
+        <Section>
+          <SectionTitle>Manhã</SectionTitle>
+
+          <SectionContent>
+            {morningAvailability.map(({ hourFormatted }) => (
+              <Hour key={hourFormatted}>
+                <HourText>{hourFormatted}</HourText>
+              </Hour>
+            ))}
+          </SectionContent>
+        </Section>
+        <Section>
+          <SectionTitle>Tarde</SectionTitle>
+
+          <SectionContent>
+            {afternoonAvailability.map(({ hourFormatted }) => (
+              <Hour key={hourFormatted}>
+                <HourText>{hourFormatted}</HourText>
+              </Hour>
+            ))}
+          </SectionContent>
+        </Section>
+      </Schedule>
     </Container>
   );
 };

@@ -14,6 +14,9 @@ interface HourProps {
   available: boolean;
   selected: boolean;
 }
+interface HourTextProps {
+  selected: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
@@ -132,8 +135,8 @@ export const Hour = styled(RectButton)<HourProps>`
   opacity: ${(props) => (props.available ? 1 : 0.3)};
 `;
 
-export const HourText = styled.Text`
-  color: #f4ede8;
+export const HourText = styled.Text<HourTextProps>`
+  color: ${(props) => (props.selected ? '#232129' : '#f4ede8')};
   font-size: 16px;
   font-family: 'RobotoSlab-Regular';
 `;

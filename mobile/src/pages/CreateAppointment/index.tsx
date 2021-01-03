@@ -62,18 +62,18 @@ const defaults = [
 ];
 
 const defaultData = [
-  { hour: '08:00', available: false },
-  { hour: '09:00', available: true },
-  { hour: '10:00', available: true },
-  { hour: '11:00', available: false },
-  { hour: '12:00', available: false },
-  { hour: '13:00', available: false },
-  { hour: '14:00', available: false },
-  { hour: '15:00', available: true },
-  { hour: '16:00', available: true },
-  { hour: '17:00', available: false },
-  { hour: '18:00', available: true },
-  { hour: '19:00', available: false },
+  { hour: 8, available: false },
+  { hour: 9, available: true },
+  { hour: 10, available: true },
+  { hour: 11, available: false },
+  { hour: 12, available: false },
+  { hour: 13, available: false },
+  { hour: 14, available: false },
+  { hour: 15, available: true },
+  { hour: 16, available: true },
+  { hour: 17, available: false },
+  { hour: 18, available: true },
+  { hour: 19, available: false },
 ];
 
 const imgDefault =

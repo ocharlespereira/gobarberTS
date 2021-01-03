@@ -14,6 +14,7 @@ import {
   BackButton,
   HeaderTitle,
   UserAvatar,
+  Content,
   ProvidersListContainer,
   ProvidersList,
   ProviderContainer,
@@ -180,74 +181,76 @@ const CreateAppointment: React.FC = () => {
         <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
       </Header>
 
-      <ProvidersListContainer>
-        <ProvidersList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={providers}
-          keyExtractor={(provider) => provider?.id}
-          renderItem={({ item: provider }) => (
-            <ProviderContainer
-              onPress={() => handleSelectProvider(provider.id)}
-              selected={provider.id === selectedProvider}
-            >
-              <ProviderAvatar
-                source={{ uri: user?.avatar_url || imgDefault }}
-              />
-              <ProviderName selected={provider.id === selectedProvider}>
-                {provider?.name || 'Charles Pereira'}
-              </ProviderName>
-            </ProviderContainer>
-          )}
-        />
-      </ProvidersListContainer>
-
-      <Calendar>
-        <Title>Escolha a data</Title>
-
-        <OpenDatePickerButton onPress={handleToggleDatePicker}>
-          <OpenDatePickerButtonText>
-            Selecionar outra data
-          </OpenDatePickerButtonText>
-        </OpenDatePickerButton>
-
-        {showDatePicker && (
-          <DateTimePicker
-            mode="date"
-            value={selectedDate}
-            display="calendar"
-            // textColor="#f4ede8"
-            onChange={handleDateChanged}
+      <Content>
+        <ProvidersListContainer>
+          <ProvidersList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={providers}
+            keyExtractor={(provider) => provider?.id}
+            renderItem={({ item: provider }) => (
+              <ProviderContainer
+                onPress={() => handleSelectProvider(provider.id)}
+                selected={provider.id === selectedProvider}
+              >
+                <ProviderAvatar
+                  source={{ uri: user?.avatar_url || imgDefault }}
+                />
+                <ProviderName selected={provider.id === selectedProvider}>
+                  {provider?.name || 'Charles Pereira'}
+                </ProviderName>
+              </ProviderContainer>
+            )}
           />
-        )}
-      </Calendar>
+        </ProvidersListContainer>
 
-      <Schedule>
-        <Title>Escolha o horário</Title>
+        <Calendar>
+          <Title>Escolha a data</Title>
 
-        <Section>
-          <SectionTitle>Manhã</SectionTitle>
+          <OpenDatePickerButton onPress={handleToggleDatePicker}>
+            <OpenDatePickerButtonText>
+              Selecionar outra data
+            </OpenDatePickerButtonText>
+          </OpenDatePickerButton>
 
-          <SectionContent>
-            {morningAvailability.map(({ hourFormatted }) => (
-              <Hour key={hourFormatted}>
-                <HourText>{hourFormatted}</HourText>
-              </Hour>
-            ))}
-          </SectionContent>
-        </Section>
-        <Section>
-          <SectionTitle>Tarde</SectionTitle>
+          {showDatePicker && (
+            <DateTimePicker
+              mode="date"
+              value={selectedDate}
+              display="calendar"
+              // textColor="#f4ede8"
+              onChange={handleDateChanged}
+            />
+          )}
+        </Calendar>
 
-          <SectionContent>
-            {afternoonAvailability.map(({ hourFormatted }) => (
-              <Hour key={hourFormatted}>
-                <HourText>{hourFormatted}</HourText>
-              </Hour>
-            ))}
-          </SectionContent>
-        </Section>
-      </Schedule>
+        <Schedule>
+          <Title>Escolha o horário</Title>
+
+          <Section>
+            <SectionTitle>Manhã</SectionTitle>
+
+            <SectionContent>
+              {morningAvailability.map(({ hourFormatted }) => (
+                <Hour key={hourFormatted}>
+                  <HourText>{hourFormatted}</HourText>
+                </Hour>
+              ))}
+            </SectionContent>
+          </Section>
+          <Section>
+            <SectionTitle>Tarde</SectionTitle>
+
+            <SectionContent>
+              {afternoonAvailability.map(({ hourFormatted }) => (
+                <Hour key={hourFormatted}>
+                  <HourText>{hourFormatted}</HourText>
+                </Hour>
+              ))}
+            </SectionContent>
+          </Section>
+        </Schedule>
+      </Content>
     </Container>
   );
 };

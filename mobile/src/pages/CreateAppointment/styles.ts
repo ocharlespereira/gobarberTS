@@ -10,6 +10,9 @@ interface ProviderConteinerProps {
 interface ProviderNameProps {
   selected: boolean;
 }
+interface HourProps {
+  available: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
@@ -119,11 +122,13 @@ export const SectionContent = styled.ScrollView.attrs({
   showsHorizontalScrollIndicator: false,
 })``;
 
-export const Hour = styled.View`
+export const Hour = styled.View<HourProps>`
   padding: 12px;
   background: #3e3b47;
   border-radius: 10px;
   margin-right: 8px;
+
+  opacity: ${(props) => (props.available ? 1 : 0.3)};
 `;
 
 export const HourText = styled.Text`

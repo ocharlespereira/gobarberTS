@@ -1,12 +1,11 @@
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
   justify-content: center;
   padding: 0px 30px ${Platform.OS === 'android' ? 150 : 40}px;
-  padding-top: 45px;
+  /* padding-top: 45px; */
 `;
 
 export const Title = styled.Text`

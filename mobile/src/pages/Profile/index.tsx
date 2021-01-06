@@ -12,6 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
+import Icon from 'react-native-vector-icons/Feather';
 
 import { useAuth } from '../../hooks/auth';
 import Button from '../../components/Button';
@@ -123,36 +124,40 @@ const Profile: React.FC = () => {
                 placeholder="E-mail"
                 returnKeyType="next"
                 onSubmitEditing={() => {
+                  oldPasswordInputRef.current?.focus();
+                }}
+              />
+              <Input
+                containerStyle={{ marginTop: 16 }}
+                ref={oldPasswordInputRef}
+                secureTextEntry
+                name="old_password"
+                icon="lock"
+                placeholder="Senha atual"
+                textContentType="newPassword"
+                returnKeyType="next"
+                onSubmitEditing={() => {
                   passwordInputRef.current?.focus();
                 }}
               />
               <Input
                 ref={passwordInputRef}
                 secureTextEntry
-                name="old_password"
-                icon="lock"
-                placeholder="Senha atual"
-                textContentType="newPassword"
-                returnKeyType="send"
-                onSubmitEditing={() => formRef.current?.submitForm()}
-              />
-
-              <Input
-                ref={passwordInputRef}
-                secureTextEntry
                 name="password"
                 icon="lock"
-                placeholder="Senha"
+                placeholder="Nova senha"
                 textContentType="newPassword"
-                returnKeyType="send"
-                onSubmitEditing={() => formRef.current?.submitForm()}
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  confirmPasswordInputRef.current?.focus();
+                }}
               />
               <Input
-                ref={passwordInputRef}
+                ref={confirmPasswordInputRef}
                 secureTextEntry
-                name="password"
+                name="password_confirmation"
                 icon="lock"
-                placeholder="Senha"
+                placeholder="Confirmar nova senha"
                 textContentType="newPassword"
                 returnKeyType="send"
                 onSubmitEditing={() => formRef.current?.submitForm()}

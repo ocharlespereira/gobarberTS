@@ -9,7 +9,7 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 32px;
+  font-size: 28px;
   color: #f4ede8;
   font-family: 'RobotoSlab-Medium';
   margin-top: 48px;
@@ -18,7 +18,7 @@ export const Title = styled.Text`
 
 export const Description = styled.Text`
   font-family: 'RobotoSlab-Regular';
-  font-size: 18px;
+  font-size: 16px;
   color: #999591;
   margin-top: 16px;
 `;

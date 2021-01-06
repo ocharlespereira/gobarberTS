@@ -1,6 +1,8 @@
-import React, { useCallback } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React, { useCallback, useMemo } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import { format } from 'date-fns/esm';
+import { ptBR } from 'date-fns/locale';
 
 import {
   Container,
@@ -10,8 +12,15 @@ import {
   OkButtonText,
 } from './styles';
 
+interface RouteParams {
+  date: number;
+}
+
 const AppointmentCreated: React.FC = () => {
   const { reset } = useNavigation();
+  const { params } = useRoute();
+
+  const routeParams = params as RouteParams;
 
   const handleOkPressed = useCallback(() => {
     reset({
@@ -24,14 +33,20 @@ const AppointmentCreated: React.FC = () => {
     });
   }, [reset]);
 
+  const formattedDate = useMemo(() => {
+    return format(
+      routeParams.date,
+      "EEEE', dia' dd 'de' MMMM 'de' yyyy 'às' HH:mm'h'",
+      { locale: ptBR },
+    );
+  }, [routeParams.date]);
+
   return (
     <Container>
       <Icon name="check" size={80} color="#04d361" />
 
       <Title>Agendamento concluido</Title>
-      <Description>
-        Quarta, dia 06 de Janeiro de 2021 ás 11:00h com Charles Pereira
-      </Description>
+      <Description>{formattedDate}</Description>
 
       <OkButton onPress={handleOkPressed}>
         <OkButtonText>Ok</OkButtonText>

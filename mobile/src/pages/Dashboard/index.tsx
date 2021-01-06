@@ -50,7 +50,7 @@ const imgDefault =
 const Dashboard: React.FC = () => {
   const [providers, setProviders] = useState<Provider[]>(defaults);
 
-  const { signOut, user } = useAuth();
+  const { user } = useAuth();
   const { navigate } = useNavigation();
 
   useEffect(() => {
@@ -60,9 +60,8 @@ const Dashboard: React.FC = () => {
   }, []);
 
   const navigateProfile = useCallback(() => {
-    // navigate('Profile');
-    signOut();
-  }, [signOut]);
+    navigate('Profile');
+  }, [navigate]);
 
   const navigateToCreateAppointment = useCallback(
     (providerId: string) => {
@@ -79,11 +78,7 @@ const Dashboard: React.FC = () => {
           <UserName>{user?.name || 'Charles Pereira'}</UserName>
         </HeaderTitle>
 
-        <ProfileButton
-          onPress={() => {
-            navigateProfile;
-          }}
-        >
+        <ProfileButton onPress={navigateProfile}>
           <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
         </ProfileButton>
       </Header>

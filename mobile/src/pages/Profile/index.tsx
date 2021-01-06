@@ -20,7 +20,13 @@ import Input from '../../components/Input';
 import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 
-import { Container, Title, UserAvatarButton, UserAvatar } from './styles';
+import {
+  Container,
+  Title,
+  BackButton,
+  UserAvatarButton,
+  UserAvatar,
+} from './styles';
 
 interface ProfileFormData {
   name: string;
@@ -84,6 +90,10 @@ const Profile: React.FC = () => {
     [navigation],
   );
 
+  const handleGoBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
+
   return (
     <>
       <KeyboardAvoidingView
@@ -96,6 +106,9 @@ const Profile: React.FC = () => {
           keyboardShouldPersistTaps="handled"
         >
           <Container>
+            <BackButton onPress={handleGoBack}>
+              <Icon name="chevron-left" size={24} color="#999591" />
+            </BackButton>
             <UserAvatarButton onPress={() => {}}>
               <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
             </UserAvatarButton>

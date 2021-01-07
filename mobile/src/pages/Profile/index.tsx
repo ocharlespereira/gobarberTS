@@ -13,6 +13,7 @@ import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
 import Icon from 'react-native-vector-icons/Feather';
+import ImagePicker from 'react-native-image-picker';
 
 import { useAuth } from '../../hooks/auth';
 import Button from '../../components/Button';
@@ -37,7 +38,7 @@ interface ProfileFormData {
 }
 
 const imgDefault =
-  'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
+  'h  ttps://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
@@ -120,8 +121,20 @@ const Profile: React.FC = () => {
         );
       }
     },
-    [navigation],
+    [navigation, updateUser],
   );
+
+  const handleUpdateAvatar = useCallback(() => {
+    ImagePicker.showImagePicker(
+      {
+        title: 'Selecione um avatar',
+        cancelButtonTitle: 'Cancelar',
+        takePhotoButtonTitle: 'Usar câmera',
+        chooseFromLibaryButtonTitle: 'Escolhe da galeria',
+      },
+      (res) => {},
+    );
+  }, []);
 
   const handleGoBack = useCallback(() => {
     navigation.goBack();

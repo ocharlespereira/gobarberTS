@@ -38,7 +38,7 @@ interface ProfileFormData {
 }
 
 const imgDefault =
-  'h  ttps://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
+  'https://avatars2.githubusercontent.com/u/54192694?s=460&u=a0ac6a9b16621a72fd3bfd6bba0c0081c2259d5b&v=4';
 
 const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
@@ -125,16 +125,39 @@ const Profile: React.FC = () => {
   );
 
   const handleUpdateAvatar = useCallback(() => {
-    // ImagePicker.showImagePicker(
-    //   {
-    //     title: 'Selecione um avatar',
-    //     cancelButtonTitle: 'Cancelar',
-    //     takePhotoButtonTitle: 'Usar câmera',
-    //     chooseFromLibaryButtonTitle: 'Escolhe da galeria',
-    //   },
-    //   (res) => {},
-    // );
-  }, []);
+    ImagePicker.showImagePicker(
+      {
+        title: 'Selecione um avatar',
+        cancelButtonTitle: 'Cancelar',
+        takePhotoButtonTitle: 'Usar câmera',
+        chooseFromLibaryButtonTitle: 'Escolhe da galeria',
+      },
+      (res: { didCancel: any; error: any; uri: any }) => {
+        if (res.didCancel) {
+          return;
+        }
+
+        if (res.error) {
+          Alert.alert('Erro ao atualizar seu avatar.');
+          return;
+        }
+
+        // const source = { uri: res.uri };
+
+        const data = new FormData();
+
+        data.append('avatar', {
+          type: 'image/jpeg',
+          name: `${user?.id || 'images'}.jpg`,
+          uri: res.uri,
+        });
+
+        api.patch('users/avatar', data).then((response) => {
+          updateUser(response.data);
+        });
+      },
+    );
+  }, [updateUser]);
 
   const handleGoBack = useCallback(() => {
     navigation.goBack();
@@ -155,7 +178,7 @@ const Profile: React.FC = () => {
             <BackButton onPress={handleGoBack}>
               <Icon name="chevron-left" size={24} color="#999591" />
             </BackButton>
-            <UserAvatarButton onPress={() => {}}>
+            <UserAvatarButton onPress={handleUpdateAvatar}>
               <UserAvatar source={{ uri: user?.avatar_url || imgDefault }} />
             </UserAvatarButton>
 

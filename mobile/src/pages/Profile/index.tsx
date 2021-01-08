@@ -125,15 +125,15 @@ const Profile: React.FC = () => {
   );
 
   const handleUpdateAvatar = useCallback(() => {
-    ImagePicker.showImagePicker(
-      {
-        title: 'Selecione um avatar',
-        cancelButtonTitle: 'Cancelar',
-        takePhotoButtonTitle: 'Usar câmera',
-        chooseFromLibaryButtonTitle: 'Escolhe da galeria',
-      },
-      (res) => {},
-    );
+    // ImagePicker.showImagePicker(
+    //   {
+    //     title: 'Selecione um avatar',
+    //     cancelButtonTitle: 'Cancelar',
+    //     takePhotoButtonTitle: 'Usar câmera',
+    //     chooseFromLibaryButtonTitle: 'Escolhe da galeria',
+    //   },
+    //   (res) => {},
+    // );
   }, []);
 
   const handleGoBack = useCallback(() => {

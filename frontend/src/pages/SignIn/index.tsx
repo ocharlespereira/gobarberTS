@@ -53,6 +53,8 @@ const SignIn: React.FC = () => {
           password: data.password,
         });
 
+        console.log('chegou');
+
         history.push('/dashboard');
       } catch (err) {
         // verifica se o erro é originado do Yup

@@ -5,7 +5,7 @@ import React, {
   useState,
   useCallback,
 } from 'react';
-//typagem do proprio react-icons
+// typagem do proprio react-icons
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
@@ -18,8 +18,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-//sempre converter a primeira letra de um component com maiuscula
-//ex.: icon: Icon
+// sempre converter a primeira letra de um component com maiuscula
+// ex.: icon: Icon
 const Input: React.FC<InputProps> = ({
   name,
   containerStyle,
@@ -58,6 +58,7 @@ const Input: React.FC<InputProps> = ({
       isErrored={!!error}
       isFilled={isFilled}
       isFocused={isFocused}
+      data-testid="input-container"
     >
       {Icon && <Icon size={20} />}
       <input

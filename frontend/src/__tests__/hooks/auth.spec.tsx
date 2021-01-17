@@ -84,7 +84,7 @@ describe('Auth hook', () => {
 
     const removeItemSpy = jest.spyOn(Storage.prototype, 'removeItem');
 
-    const { result, waitForNextUpdate } = renderHook(() => useAuth(), {
+    const { result } = renderHook(() => useAuth(), {
       wrapper: AuthProvider,
     });
 
@@ -94,5 +94,31 @@ describe('Auth hook', () => {
 
     expect(removeItemSpy).toHaveBeenCalledTimes(2);
     expect(result.current.user).toBeUndefined();
+  });
+
+  it('should be able to update user data', async () => {
+    const setItemSpy = jest.spyOn(Storage.prototype, 'setItem');
+
+    const { result } = renderHook(() => useAuth(), {
+      wrapper: AuthProvider,
+    });
+
+    const user = {
+      id: 'user123',
+      name: 'John Doe',
+      email: 'johndoe@exemple.com.br',
+      avatar_url: 'image-test.jpg',
+    };
+
+    act(() => {
+      result.current.updateUser(user);
+    });
+
+    expect(setItemSpy).toHaveBeenCalledWith(
+      '@Gobarber2020:user',
+      JSON.stringify(user),
+    );
+
+    expect(result.current.user).toEqual(user);
   });
 });
